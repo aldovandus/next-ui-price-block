@@ -43,8 +43,6 @@ const getPriceBlocks = async () => {
 export function Dashboard() {
   const [priceBlocks, setPriceBlocks] = useState<PriceBlock[]>([]);
 
-  const [];
-
   const [currentPriceBlockIndex, setCurrentPriceBlockIndex] = useState(0);
 
   useEffect(() => {
@@ -54,11 +52,11 @@ export function Dashboard() {
   return (
     <div className="grid h-screen w-full pl-[56px]">
       <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
-        <div className="border-b p-2">
+        {/*   <div className="border-b p-2">
           <Button variant="outline" size="icon" aria-label="Home">
             <Triangle className="size-5 fill-foreground" />
           </Button>
-        </div>
+        </div> */}
         {/*  <nav className="grid gap-1 p-2">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -237,10 +235,10 @@ export function Dashboard() {
               </form>
             </DrawerContent>
           </Drawer> */}
-          <Button variant="outline" size="sm" className="ml-auto gap-1.5 text-sm">
+          {/*  <Button variant="outline" size="sm" className="ml-auto gap-1.5 text-sm">
             <Share className="size-3.5" />
             Share
-          </Button>
+          </Button> */}
         </header>
         <main className="grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3">
           <div className="relative hidden flex-col items-start gap-8 md:flex" x-chunk="dashboard-03-chunk-0">
