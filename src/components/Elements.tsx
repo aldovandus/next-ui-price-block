@@ -4,6 +4,7 @@ import { AlignText, FontStyle, PriceBlockElementKey } from "./types";
 import FullPricePreview from "./preview/FullPricePreview";
 import DiscountedPreview from "./preview/DiscountedPreview";
 import DiscountPreview from "./preview/DiscountPreview";
+import CustomFieldPreview from "./preview/CustomFieldPreview";
 //import DraggableItem from '../DraggableItem';
 //import { PriceBlockElementKey } from '../types';
 //import { GRID_SIZE, NUM_COLUMNS, NUM_COLUMNS_BADGE, NUM_ROWS } from '../PriceBlockGrid';
@@ -24,13 +25,13 @@ type LookupElement = { [key in PriceBlockElementKey]: FC<IGenericPreviewProps> }
 const lookupContent: Partial<LookupElement> = {
   [PriceBlockElementKey.FULLPRICE]: FullPricePreview,
   [PriceBlockElementKey.DISCOUNTED]: DiscountedPreview,
-  [PriceBlockElementKey.DISCOUNT]: DiscountPreview
+  [PriceBlockElementKey.DISCOUNT]: DiscountPreview,
   /* 	[PriceBlockElementKey.DISCOUNT]: DiscountPreview,
 	[PriceBlockElementKey.DISCOUNTED]: DiscountedPreview,
-	[PriceBlockElementKey.BADGE]: BadgePreview,
-	[PriceBlockElementKey.CUSTOMFIELD_1]: CustomFieldPreview,
-	[PriceBlockElementKey.CUSTOMFIELD_2]: CustomFieldPreview,
-	[PriceBlockElementKey.CUSTOMFIELD_3]: CustomFieldPreview, */
+	[PriceBlockElementKey.BADGE]: BadgePreview,*/
+  [PriceBlockElementKey.CUSTOMFIELD_1]: CustomFieldPreview,
+  [PriceBlockElementKey.CUSTOMFIELD_2]: CustomFieldPreview,
+  [PriceBlockElementKey.CUSTOMFIELD_3]: CustomFieldPreview
 };
 
 const Item = (props) => {
@@ -40,13 +41,14 @@ const Item = (props) => {
     if (!item) return {};
     const { position } = item;
     return {
+      position: "absolute",
       bottom: (NUM_COLUMNS - position.rowEnd) * GRID_SIZE,
       left: position.colStart * GRID_SIZE,
       width: (position.colEnd - position.colStart) * GRID_SIZE,
       height: (position.rowEnd - position.rowStart) * GRID_SIZE,
       zIndex: item.layer
     };
-  }, []);
+  }, [item]);
 
   const Component = lookupContent[props.id];
 
@@ -66,7 +68,7 @@ const Elements = ({ elements, settings }) => {
   }, []);
 
   return (
-    <div style={style}>
+    <div className="h-full w-full  ">
       {Object.keys(elements).map((keyElement) => {
         return (
           <Item

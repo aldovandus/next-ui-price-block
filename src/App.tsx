@@ -1,32 +1,11 @@
-import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import DynamicPriceBlock from "./components/DynamicPriceBlock";
-import { PriceBlock } from "./types/price-block";
-
-const url = "http://localhost:3000/api/price-block/get-price-blocks";
-
-const getPriceBlocks = async () => {
-  try {
-    const data = await fetch(url);
-    const { result } = await data.json();
-    return result;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
+import { Dashboard } from "./components/Dashboard";
 
 function App() {
-  const [priceBlocks, setPriceBlocks] = useState<PriceBlock[]>([]);
-
-  useEffect(() => {
-    getPriceBlocks().then((res) => setPriceBlocks(res));
-  }, []);
-
-  console.log({ priceBlocks });
-  if (priceBlocks.length === 0) return null;
+  return <Dashboard />;
 
   return (
     <div className="flex gap-4">

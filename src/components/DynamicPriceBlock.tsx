@@ -1,5 +1,6 @@
-import React from "react";
-import Elements from "./Elements";
+import React, { useMemo } from "react";
+import Elements, { GRID_SIZE, NUM_COLUMNS, NUM_ROWS } from "./Elements";
+import { Button } from "./ui/button";
 //import { IEurospinProps } from '../eurospin/types';
 //import "./generic-price-block.css";
 
@@ -31,9 +32,28 @@ const DynamicPriceBlock = ({
 }: any) => {
   console.log(priceBlockJson);
 
+  const background = priceBlockJson.settings.background;
+
+  const getBackground = useMemo(() => {
+    if (background.type == "image") {
+      return `url(${background.url}) center center / contain no-repeat`;
+    } else if (background.type == "color") {
+      return background.color;
+    } else {
+      return "none";
+    }
+  }, [background.color, background.type, background.url]);
+
   if (!priceBlockJson) return null;
   return (
-    <div className="">
+    <div
+      className="relative"
+      style={{
+        background: getBackground,
+        height: NUM_ROWS * GRID_SIZE,
+        width: NUM_COLUMNS * GRID_SIZE
+      }}
+    >
       <Elements elements={priceBlockJson.priceBlockElements} settings={priceBlockJson.settings} />
     </div>
   );
