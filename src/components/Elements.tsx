@@ -18,7 +18,7 @@ import BadgePreview from "./preview/BadgePreview";
 //import { PriceBlockElementKey } from '../types';
 //import { GRID_SIZE, NUM_COLUMNS, NUM_COLUMNS_BADGE, NUM_ROWS } from '../PriceBlockGrid';
 
-export const GRID_SIZE = 18;
+export const GRID_SIZE = 4.8;
 export const NUM_ROWS = 20;
 export const NUM_COLUMNS = 20;
 export const NUM_COLUMNS_BADGE = 24;
