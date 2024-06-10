@@ -2,8 +2,7 @@
 import type { CSSProperties } from "react";
 import { useMemo } from "react";
 import classNames from "classnames";
-import React from "react";
-import { IPriceBlockElement, IFullPriceProperties, PriceBlockElementKey, FontStyle, AlignText } from "../types";
+import { IFullPriceProperties, IPriceBlockSettings } from "../types";
 import SeparateNumberFormatted from "../separate-number-formatted/SeparateNumberFormatted";
 import useBoxStyle from "../../hooks/useBoxStyle";
 import useFontStyle from "../../hooks/useFontStyle";
@@ -16,13 +15,18 @@ import useFontStyle from "../../hooks/useFontStyle";
 	},
 }; */
 
-const FullPricePreview = ({ settings, properties }) => {
+interface Props {
+  settings?: IPriceBlockSettings;
+  properties?: IFullPriceProperties;
+}
+
+const FullPricePreview = ({ settings, properties }: Props) => {
   //const settings = usePriceBlockStore((state) => state.settings);
   //const priceBlockElements = usePriceBlockStore((state) => state.priceBlockElements);
   //const element = priceBlockElements[PriceBlockElementKey.FULLPRICE] as IPriceBlockElement<IFullPriceProperties>;
   //const element = priceBlockElements[0];
-  const boxStyle = useBoxStyle({ box: properties.box });
-  const fontStyle = useFontStyle({ font: properties.font });
+  const boxStyle = useBoxStyle({ box: properties?.box });
+  const fontStyle = useFontStyle({ font: properties?.font });
 
   const getStyle = useMemo((): CSSProperties => {
     return { ...boxStyle, ...fontStyle };
@@ -31,7 +35,7 @@ const FullPricePreview = ({ settings, properties }) => {
   console.log({ fontStyle });
 
   const renderCrossedLine = useMemo(() => {
-    if (!properties.showCrossedLine) return null;
+    if (!properties?.showCrossedLine) return null;
     const style = {
       backgroundColor: properties.font.color,
       transform: `rotate(${properties.rotateCrossedLine ?? ""}deg)`,
@@ -46,11 +50,11 @@ const FullPricePreview = ({ settings, properties }) => {
     <div className={classNames("flex h-full w-full flex-col justify-center", { relative: properties.showCrossedLine })} style={getStyle}>
       {renderCrossedLine}
       <SeparateNumberFormatted
-        thousandSeparator={settings.separator.thousand}
-        decimalSeparator={settings.separator.decimal}
+        thousandSeparator={settings?.separator.thousand}
+        decimalSeparator={settings?.separator.decimal}
         showCurrency={properties.showCurrency}
         fontSize={properties.font.size}
-        currency={settings.currency}
+        currency={settings?.currency}
         value={properties.exampleContent}
       />
     </div>

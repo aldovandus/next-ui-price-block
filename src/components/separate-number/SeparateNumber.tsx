@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import type { CSSProperties } from "react";
 import type { SeparateNumberCurrencyPosition } from "./types";
-import React from "react";
 
 type SeparateNumberClasses = {
   containerClass?: string;

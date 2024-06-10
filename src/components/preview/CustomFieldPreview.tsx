@@ -1,13 +1,11 @@
-import usePriceBlockStore from "@/zustand/price-block/priceBlock";
-import type { ICustomFieldProperties, IPriceBlockElement } from "../types";
 import type { CSSProperties } from "react";
 import { useMemo } from "react";
 import useBoxStyle from "../../hooks/useBoxStyle";
 import useFontStyle from "../../hooks/useFontStyle";
 import classNames from "classnames";
-import { IGenericPreviewProps } from "../Elements";
+import { ICustomFieldProperties } from "../types";
 
-const CustomFieldPreview = ({ properties }: IGenericPreviewProps) => {
+const CustomFieldPreview = ({ properties }: { properties: ICustomFieldProperties }) => {
   const boxStyle = useBoxStyle({ box: properties.box });
   const fontStyle = useFontStyle({ font: properties.font });
 

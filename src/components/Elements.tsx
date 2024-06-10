@@ -1,10 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 //import usePriceBlockStore from '@/zustand/price-block/priceBlock';
-import React, { FC, useMemo } from "react";
-import { AlignText, FontStyle, PriceBlockElementKey } from "./types";
+import { CSSProperties, FC, useMemo } from "react";
+import {
+  IGenericPreviewProps,
+  IPriceBlockElement,
+  IPriceBlockElements,
+  IPriceBlockSettings,
+  PriceBlockElementKey,
+  PriceBlockGenericProperties
+} from "./types";
 import FullPricePreview from "./preview/FullPricePreview";
 import DiscountedPreview from "./preview/DiscountedPreview";
 import DiscountPreview from "./preview/DiscountPreview";
 import CustomFieldPreview from "./preview/CustomFieldPreview";
+import BadgePreview from "./preview/BadgePreview";
 //import DraggableItem from '../DraggableItem';
 //import { PriceBlockElementKey } from '../types';
 //import { GRID_SIZE, NUM_COLUMNS, NUM_COLUMNS_BADGE, NUM_ROWS } from '../PriceBlockGrid';
@@ -15,28 +24,29 @@ export const NUM_COLUMNS = 20;
 export const NUM_COLUMNS_BADGE = 24;
 export const LIMIT_TOP_ROW_BADGE = -4;
 
-interface IGenericPreviewProps {
-  keyElement: PriceBlockElementKey;
-}
-
-export type { IGenericPreviewProps };
-
 type LookupElement = { [key in PriceBlockElementKey]: FC<IGenericPreviewProps> };
 const lookupContent: Partial<LookupElement> = {
   [PriceBlockElementKey.FULLPRICE]: FullPricePreview,
   [PriceBlockElementKey.DISCOUNTED]: DiscountedPreview,
   [PriceBlockElementKey.DISCOUNT]: DiscountPreview,
   /* 	[PriceBlockElementKey.DISCOUNT]: DiscountPreview,
-	[PriceBlockElementKey.DISCOUNTED]: DiscountedPreview,
-	[PriceBlockElementKey.BADGE]: BadgePreview,*/
+	[PriceBlockElementKey.DISCOUNTED]: DiscountedPreview, */
+  [PriceBlockElementKey.BADGE]: BadgePreview,
   [PriceBlockElementKey.CUSTOMFIELD_1]: CustomFieldPreview,
   [PriceBlockElementKey.CUSTOMFIELD_2]: CustomFieldPreview,
   [PriceBlockElementKey.CUSTOMFIELD_3]: CustomFieldPreview
 };
 
-const Item = (props) => {
-  const item = props.item;
+// Props for the Item component
+interface ItemProps {
+  id?: PriceBlockElementKey;
+  item?: IPriceBlockElement<any>;
+  settings: IPriceBlockSettings;
+  properties?: PriceBlockGenericProperties;
+}
 
+const Item = (props: ItemProps) => {
+  const { item } = props;
   const currentStyle = useMemo(() => {
     if (!item) return {};
     const { position } = item;
@@ -50,35 +60,28 @@ const Item = (props) => {
     };
   }, [item]);
 
-  const Component = lookupContent[props.id];
+  const Component = lookupContent[props.id as PriceBlockElementKey] as any;
 
   return (
-    <div style={currentStyle}>
+    <div style={currentStyle as CSSProperties}>
       <Component {...props} />
     </div>
   );
 };
 
-const Elements = ({ elements, settings }) => {
-  const style = useMemo(() => {
+const Elements = ({ elements, settings }: { elements: IPriceBlockElements; settings: IPriceBlockSettings }) => {
+  /*   const style = useMemo(() => {
     return {
       height: NUM_ROWS * GRID_SIZE,
       width: NUM_COLUMNS * GRID_SIZE
     };
-  }, []);
-
+  }, []); */
   return (
     <div className="h-full w-full  ">
       {Object.keys(elements).map((keyElement) => {
-        return (
-          <Item
-            properties={elements[keyElement].properties}
-            item={elements[keyElement]}
-            settings={settings}
-            key={keyElement}
-            id={keyElement as any}
-          />
-        );
+        const element = elements[keyElement as PriceBlockElementKey];
+
+        return <Item properties={element?.properties} item={element} settings={settings} key={keyElement} id={keyElement as PriceBlockElementKey} />;
       })}
     </div>
   );
