@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import DynamicPriceBlock from "./DynamicPriceBlock";
 import { PriceBlock } from "@/types/price-block";
 import { useState, useEffect } from "react";
+import { usePriceBlockStore } from "@/zustand/price-block-store";
 //import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 const url = "http://localhost:3000/api/price-block/get-price-blocks";
 
@@ -298,16 +299,42 @@ export function Dashboard() {
                 </div>
                 <div className="grid gap-3">
                   <Label htmlFor="temperature">Grid</Label>
-                  <Input onChange={() => {}} id="temperature" defaultValue={18} type="number" placeholder="18" />
+                  <Input
+                    onChange={(e) => {
+                      usePriceBlockStore.getState().setGridSize(parseInt(e.target.value));
+                    }}
+                    id="temperature"
+                    defaultValue={18}
+                    type="number"
+                    placeholder="18"
+                    min={1}
+                    max={50}
+                  />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="grid gap-3">
-                    <Label htmlFor="top-p">Top P</Label>
-                    <Input id="top-p" type="number" placeholder="0.7" />
+                    <Label htmlFor="top-p">Num Cols</Label>
+                    <Input
+                      defaultValue={usePriceBlockStore.getState().numCols}
+                      onChange={(e) => {
+                        usePriceBlockStore.getState().setNumCols(parseInt(e.target.value));
+                      }}
+                      id="top-p"
+                      type="number"
+                      placeholder="0.7"
+                    />
                   </div>
                   <div className="grid gap-3">
-                    <Label htmlFor="top-k">Top K</Label>
-                    <Input id="top-k" type="number" placeholder="0.0" />
+                    <Label htmlFor="top-k">Num Rows</Label>
+                    <Input
+                      defaultValue={usePriceBlockStore.getState().numRows}
+                      onChange={(e) => {
+                        usePriceBlockStore.getState().setNumRows(parseInt(e.target.value));
+                      }}
+                      id="top-k"
+                      type="number"
+                      placeholder="0.0"
+                    />
                   </div>
                 </div>
               </fieldset>

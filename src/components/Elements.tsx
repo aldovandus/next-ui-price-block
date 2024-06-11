@@ -14,13 +14,14 @@ import DiscountedPreview from "./preview/DiscountedPreview";
 import DiscountPreview from "./preview/DiscountPreview";
 import CustomFieldPreview from "./preview/CustomFieldPreview";
 import BadgePreview from "./preview/BadgePreview";
+import { usePriceBlockStore } from "@/zustand/price-block-store";
 //import DraggableItem from '../DraggableItem';
 //import { PriceBlockElementKey } from '../types';
 //import { GRID_SIZE, NUM_COLUMNS, NUM_COLUMNS_BADGE, NUM_ROWS } from '../PriceBlockGrid';
 
-export const GRID_SIZE = 4.8;
-export const NUM_ROWS = 20;
-export const NUM_COLUMNS = 20;
+/* export const GRID_SIZE = 12;
+export const NUM_ROWS = 17;
+export const NUM_COLUMNS = 8; */
 export const NUM_COLUMNS_BADGE = 24;
 export const LIMIT_TOP_ROW_BADGE = -4;
 
@@ -46,19 +47,21 @@ interface ItemProps {
 }
 
 const Item = (props: ItemProps) => {
+  const gridSize = usePriceBlockStore((state) => state.gridSize);
+  const numCols = usePriceBlockStore((state) => state.numCols);
   const { item } = props;
   const currentStyle = useMemo(() => {
     if (!item) return {};
     const { position } = item;
     return {
       position: "absolute",
-      bottom: (NUM_COLUMNS - position.rowEnd) * GRID_SIZE,
-      left: position.colStart * GRID_SIZE,
-      width: (position.colEnd - position.colStart) * GRID_SIZE,
-      height: (position.rowEnd - position.rowStart) * GRID_SIZE,
+      bottom: (numCols - position.rowEnd) * gridSize,
+      left: position.colStart * gridSize,
+      width: (position.colEnd - position.colStart) * gridSize,
+      height: (position.rowEnd - position.rowStart) * gridSize,
       zIndex: item.layer
     };
-  }, [item]);
+  }, [gridSize, item, numCols]);
 
   const Component = lookupContent[props.id as PriceBlockElementKey] as any;
 
