@@ -25,6 +25,10 @@ export function Dashboard() {
 
   const [currentPriceBlockIndex, setCurrentPriceBlockIndex] = useState(0);
 
+  const gridSize = usePriceBlockStore((state) => state.gridSize);
+  const numRows = usePriceBlockStore((state) => state.numRows);
+  const numCols = usePriceBlockStore((state) => state.numCols);
+
   useEffect(() => {
     getPriceBlocks().then((res) => setPriceBlocks(res));
   }, []);
@@ -305,6 +309,7 @@ export function Dashboard() {
                     }}
                     id="temperature"
                     defaultValue={18}
+                    value={gridSize}
                     type="number"
                     placeholder="18"
                     min={1}
@@ -315,6 +320,7 @@ export function Dashboard() {
                   <div className="grid gap-3">
                     <Label htmlFor="top-p">Num Cols</Label>
                     <Input
+                      value={numCols}
                       defaultValue={usePriceBlockStore.getState().numCols}
                       onChange={(e) => {
                         usePriceBlockStore.getState().setNumCols(parseInt(e.target.value));
@@ -327,6 +333,7 @@ export function Dashboard() {
                   <div className="grid gap-3">
                     <Label htmlFor="top-k">Num Rows</Label>
                     <Input
+                      value={numRows}
                       defaultValue={usePriceBlockStore.getState().numRows}
                       onChange={(e) => {
                         usePriceBlockStore.getState().setNumRows(parseInt(e.target.value));
@@ -366,7 +373,13 @@ export function Dashboard() {
             </Badge>
             <div className="flex-1">
               {priceBlocks.length > 0 && (
-                <DynamicPriceBlock key={currentPriceBlockIndex} priceBlockJson={priceBlocks[currentPriceBlockIndex].jsonConf} />
+                <DynamicPriceBlock
+                  key={currentPriceBlockIndex}
+                  priceBlockJson={priceBlocks[currentPriceBlockIndex].jsonConf}
+                  numCols={10}
+                  numRows={24}
+                  gridSize={10}
+                />
               )}
             </div>
             <form

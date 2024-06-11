@@ -1,6 +1,6 @@
+import DynamicPriceBlock from "..";
 import "./App.css";
 import { Dashboard } from "./components/Dashboard";
-import DynamicPriceBlock from "../";
 
 const jsonString =
   '"{"settings":{"name":"","currency":"€","showGrid":false,"separator":{"decimal":",","thousand":"."},"background":{"type":"nothing"}},"priceBlockElements":{"fullPrice":{"label":"full","layer":2,"position":{"rowStart":9,"rowEnd":17,"colStart":3,"colEnd":11},"properties":{"exampleContent":24.9,"showCurrency":true,"showCrossedLine":false,"rotateCrossedLine":0,"crossedLineHeight":2,"font":{"family":"Arial","size":"22unit","style":"normal","color":"#000000","align":"center","fontBorder":{"isEnabled":false,"color":"#000","width":"2unit"}},"box":{"color":"trasparent","border":{"color":"#161659","thickness":{"top":"0unit","bottom":"0unit","left":"0unit","right":"0unit"},"radius":{"tl":"0px","tr":"0px","bl":"0px","br":"0px"}},"shadow":{"offsetX":"0unit","offsetY":"0unit","blur":"0unit"},"padding":{"top":"0unit","right":"0unit","bottom":"0unit","left":"0unit"}}}}}}"';
@@ -18,7 +18,7 @@ const jsonObject = JSON.parse(cleanedString);
 function App() {
   return (
     <div>
-      test - <DynamicPriceBlock priceBlockJson={jsonObject} />;
+      test - <DynamicPriceBlock gridSize={30} priceBlockJson={jsonObject} />;
     </div>
   );
   return <Dashboard />;

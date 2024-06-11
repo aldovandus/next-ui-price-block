@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Elements from "./Elements";
 import { PriceBLockForSave } from "./types";
 import { usePriceBlockStore } from "@/zustand/price-block-store";
@@ -19,12 +19,14 @@ const cleanedString = jsonString2.slice(1, -1);
 interface Props {
   priceBlockJson: PriceBLockForSave;
   gridSize?: number;
+  numRows?: number;
+  numCols?: number;
 }
 
-const DynamicPriceBlock = ({ priceBlockJson }: Props) => {
-  const gridSize = usePriceBlockStore((state) => state.gridSize);
-  const numRows = usePriceBlockStore((state) => state.numRows);
-  const numCols = usePriceBlockStore((state) => state.numCols);
+const DynamicPriceBlock = ({ priceBlockJson, gridSize, numRows, numCols }: Props) => {
+  const gridSizeValue = usePriceBlockStore((state) => state.gridSize);
+  const numRowsValue = usePriceBlockStore((state) => state.numRows);
+  const numColsValue = usePriceBlockStore((state) => state.numCols);
   console.log(priceBlockJson);
 
   const background = priceBlockJson.settings.background;
@@ -39,14 +41,20 @@ const DynamicPriceBlock = ({ priceBlockJson }: Props) => {
     }
   }, [background.color, background.type, background.url]);
 
+  useEffect(() => {
+    if (gridSize) usePriceBlockStore.setState({ gridSize });
+    if (numRows) usePriceBlockStore.setState({ numRows });
+    if (numCols) usePriceBlockStore.setState({ numCols });
+  }, [gridSize, numCols, numRows]);
+
   if (!priceBlockJson) return null;
   return (
     <div
       className="relative"
       style={{
         background: getBackground,
-        height: numRows * gridSize,
-        width: numCols * gridSize
+        height: numRowsValue * gridSizeValue,
+        width: numColsValue * gridSizeValue
       }}
     >
       <Elements elements={priceBlockJson.priceBlockElements} settings={priceBlockJson.settings} />
