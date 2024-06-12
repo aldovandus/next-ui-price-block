@@ -8,7 +8,8 @@ import { PriceBlock } from "@/types/price-block";
 import { useState, useEffect } from "react";
 import { usePriceBlockStore } from "@/zustand/price-block-store";
 //import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-const url = "http://localhost:3000/api/price-block/get-price-blocks";
+//const url = "http://localhost:3000/api/price-block/get-price-blocks";
+const url = "https://staging.dacnl39nyabtl.amplifyapp.com/api/price-block/get-price-blocks";
 
 const getPriceBlocks = async () => {
   try {
@@ -334,7 +335,7 @@ export function Dashboard() {
                     <Label htmlFor="top-k">Num Rows</Label>
                     <Input
                       value={numRows}
-                      defaultValue={usePriceBlockStore.getState().numRows}
+                      defaultValue={numRows}
                       onChange={(e) => {
                         usePriceBlockStore.getState().setNumRows(parseInt(e.target.value));
                       }}
@@ -376,9 +377,8 @@ export function Dashboard() {
                 <DynamicPriceBlock
                   key={currentPriceBlockIndex}
                   priceBlockJson={priceBlocks[currentPriceBlockIndex].jsonConf}
-                  numCols={10}
-                  numRows={24}
                   gridSize={10}
+                  discount="30%"
                 />
               )}
             </div>

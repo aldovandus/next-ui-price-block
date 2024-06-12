@@ -4,11 +4,14 @@ import useBoxStyle from "../../hooks/useBoxStyle";
 import useFontStyle from "../../hooks/useFontStyle";
 import classNames from "classnames";
 import { IDiscountedProperties } from "../types";
+import { usePriceBlockStore } from "../../zustand/price-block-store";
 
 const DiscountPreview = ({ properties }: { properties: IDiscountedProperties }) => {
   //const element = priceBlockElements[PriceBlockElementKey.DISCOUNT] as IPriceBlockElement<IDiscountProperties>;
   const boxStyle = useBoxStyle({ box: properties.box });
   const fontStyle = useFontStyle({ font: properties.font });
+
+  const discount = usePriceBlockStore((state) => state.discount);
 
   const getStyle = useMemo((): CSSProperties => {
     return { ...boxStyle, ...fontStyle };
@@ -18,7 +21,7 @@ const DiscountPreview = ({ properties }: { properties: IDiscountedProperties }) 
 
   return (
     <div className={classNames("flex h-full w-full flex-col justify-center")} style={getStyle}>
-      <div dangerouslySetInnerHTML={{ __html: properties.exampleContent }} />
+      <div dangerouslySetInnerHTML={{ __html: discount ?? properties.exampleContent }} />
     </div>
   );
 };

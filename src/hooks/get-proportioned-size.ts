@@ -1,4 +1,4 @@
-import { usePriceBlockStore } from "@/zustand/price-block-store";
+import { usePriceBlockStore } from "../zustand/price-block-store";
 
 const getProportionedSize = (size?: string) => {
   const gridSize = usePriceBlockStore.getState().gridSize;

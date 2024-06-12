@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import Elements from "./Elements";
 import { PriceBLockForSave } from "./types";
-import { usePriceBlockStore } from "@/zustand/price-block-store";
+import { usePriceBlockStore } from "../zustand/price-block-store";
 
 /* const jsonString =
   '"{"settings":{"name":"","currency":"€","showGrid":false,"separator":{"decimal":",","thousand":"."},"background":{"type":"nothing"}},"priceBlockElements":{"fullPrice":{"label":"full","layer":2,"position":{"rowStart":9,"rowEnd":17,"colStart":3,"colEnd":11},"properties":{"exampleContent":24.9,"showCurrency":true,"showCrossedLine":false,"rotateCrossedLine":0,"crossedLineHeight":2,"font":{"family":"Arial","size":"22unit","style":"normal","color":"#000000","align":"center","fontBorder":{"isEnabled":false,"color":"#000","width":"2unit"}},"box":{"color":"trasparent","border":{"color":"#161659","thickness":{"top":"0unit","bottom":"0unit","left":"0unit","right":"0unit"},"radius":{"tl":"0px","tr":"0px","bl":"0px","br":"0px"}},"shadow":{"offsetX":"0unit","offsetY":"0unit","blur":"0unit"},"padding":{"top":"0unit","right":"0unit","bottom":"0unit","left":"0unit"}}}}}}"';
@@ -21,12 +21,15 @@ interface Props {
   gridSize?: number;
   numRows?: number;
   numCols?: number;
+  priceOriginal?: number;
+  priceDiscounted?: number;
+  discount?: string;
 }
 
-const DynamicPriceBlock = ({ priceBlockJson, gridSize, numRows, numCols }: Props) => {
+const DynamicPriceBlock = ({ priceBlockJson, gridSize, numRows = 8, numCols = 8, discount, priceOriginal, priceDiscounted }: Props) => {
   const gridSizeValue = usePriceBlockStore((state) => state.gridSize);
-  const numRowsValue = usePriceBlockStore((state) => state.numRows);
-  const numColsValue = usePriceBlockStore((state) => state.numCols);
+  /* const numRowsValue = usePriceBlockStore((state) => state.numRows);
+  const numColsValue = usePriceBlockStore((state) => state.numCols); */
   console.log(priceBlockJson);
 
   const background = priceBlockJson.settings.background;
@@ -43,9 +46,10 @@ const DynamicPriceBlock = ({ priceBlockJson, gridSize, numRows, numCols }: Props
 
   useEffect(() => {
     if (gridSize) usePriceBlockStore.setState({ gridSize });
-    if (numRows) usePriceBlockStore.setState({ numRows });
-    if (numCols) usePriceBlockStore.setState({ numCols });
-  }, [gridSize, numCols, numRows]);
+    /* if (numRows) usePriceBlockStore.setState({ numRows });
+    if (numCols) usePriceBlockStore.setState({ numCols }); */
+    usePriceBlockStore.setState({ discount, priceOriginal, priceDiscounted });
+  }, [discount, gridSize, numCols, numRows, priceDiscounted, priceOriginal]);
 
   if (!priceBlockJson) return null;
   return (
@@ -53,8 +57,8 @@ const DynamicPriceBlock = ({ priceBlockJson, gridSize, numRows, numCols }: Props
       className="relative"
       style={{
         background: getBackground,
-        height: numRowsValue * gridSizeValue,
-        width: numColsValue * gridSizeValue
+        height: numRows * gridSizeValue,
+        width: numCols * gridSizeValue
       }}
     >
       <Elements elements={priceBlockJson.priceBlockElements} settings={priceBlockJson.settings} />

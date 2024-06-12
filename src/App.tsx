@@ -16,11 +16,11 @@ const cleanedString = jsonString.slice(1, -1);
 const jsonObject = JSON.parse(cleanedString);
 
 function App() {
-  return (
+  /*   return (
     <div>
-      test - <DynamicPriceBlock gridSize={30} priceBlockJson={jsonObject} />;
+      test - <DynamicPriceBlock gridSize={10} priceBlockJson={jsonObject} />;
     </div>
-  );
+  ); */
   return <Dashboard />;
 }
 

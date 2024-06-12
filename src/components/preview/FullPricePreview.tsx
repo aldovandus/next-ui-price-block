@@ -6,6 +6,7 @@ import { IFullPriceProperties, IPriceBlockSettings } from "../types";
 import SeparateNumberFormatted from "../separate-number-formatted/SeparateNumberFormatted";
 import useBoxStyle from "../../hooks/useBoxStyle";
 import useFontStyle from "../../hooks/useFontStyle";
+import { usePriceBlockStore } from "../../zustand/price-block-store";
 
 /* const settings = {
 	currency: '¤',
@@ -27,6 +28,8 @@ const FullPricePreview = ({ settings, properties }: Props) => {
   //const element = priceBlockElements[0];
   const boxStyle = useBoxStyle({ box: properties?.box });
   const fontStyle = useFontStyle({ font: properties?.font });
+
+  const priceOriginal = usePriceBlockStore((state) => state.priceOriginal);
 
   const getStyle = useMemo((): CSSProperties => {
     return { ...boxStyle, ...fontStyle };
@@ -55,7 +58,7 @@ const FullPricePreview = ({ settings, properties }: Props) => {
         showCurrency={properties.showCurrency}
         fontSize={properties.font.size}
         currency={settings?.currency}
-        value={properties.exampleContent}
+        value={priceOriginal?.value?.length ? priceOriginal.value?.[0] : properties.exampleContent}
       />
     </div>
   );
