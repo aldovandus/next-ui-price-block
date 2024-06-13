@@ -4,11 +4,13 @@ import { useMemo } from "react";
 import useBoxStyle from "../../hooks/useBoxStyle";
 import useFontStyle from "../../hooks/useFontStyle";
 import SeparateNumberFormatted from "../separate-number-formatted/SeparateNumberFormatted";
+import { usePriceBlockStore } from "../../zustand/price-block-store";
 
 const DiscountedPreview = ({ settings, properties }: { settings: IPriceBlockSettings; properties: IDiscountedProperties }) => {
   //const element = priceBlockElements[PriceBlockElementKey.DISCOUNTED] as IPriceBlockElement<IDiscountedProperties>;
   const boxStyle = useBoxStyle({ box: properties.box });
   const fontStyle = useFontStyle({ font: properties.font });
+  const priceDiscounted = usePriceBlockStore((state) => state.priceDiscounted);
 
   const getStyle = useMemo((): CSSProperties => {
     return { ...boxStyle, ...fontStyle };
@@ -24,7 +26,7 @@ const DiscountedPreview = ({ settings, properties }: { settings: IPriceBlockSett
         showCurrency={properties.showCurrency}
         fontSize={properties.font.size}
         currency={settings.currency}
-        value={properties.exampleContent}
+        value={priceDiscounted?.value?.length ? priceDiscounted.value?.[0] : properties.exampleContent}
         type={properties.format.isEnable ? properties.format.type : undefined}
       />
     </div>
