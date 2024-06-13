@@ -6,8 +6,8 @@ interface PriceBlockStoreState {
   numRows: number;
   numCols: number;
   discount: string;
-  priceOriginal?: any;
-  priceDiscounted?: any;
+  fullPriceValue?: string;
+  discountedValue?: string;
   setGridSize(_: number): void;
   setNumRows(_: number): void;
   setNumCols(_: number): void;
@@ -21,8 +21,6 @@ const usePriceBlockStore = create<PriceBlockStoreState>((set) => ({
   setGridSize: (value: number) => set({ gridSize: value }),
   setNumRows: (value: number) => set({ numRows: value }),
   setNumCols: (value: number) => set({ numCols: value })
-  /*  removeAllBears: () => set({ bears: 0 }),
-  updateBears: (newBears) => set({ bears: newBears }) */
 }));
 
 export { usePriceBlockStore };

@@ -10,7 +10,7 @@ const DiscountedPreview = ({ settings, properties }: { settings: IPriceBlockSett
   //const element = priceBlockElements[PriceBlockElementKey.DISCOUNTED] as IPriceBlockElement<IDiscountedProperties>;
   const boxStyle = useBoxStyle({ box: properties.box });
   const fontStyle = useFontStyle({ font: properties.font });
-  const priceDiscounted = usePriceBlockStore((state) => state.priceDiscounted);
+  const discountedValue = usePriceBlockStore((state) => state.discountedValue);
 
   const getStyle = useMemo((): CSSProperties => {
     return { ...boxStyle, ...fontStyle };
@@ -26,7 +26,7 @@ const DiscountedPreview = ({ settings, properties }: { settings: IPriceBlockSett
         showCurrency={properties.showCurrency}
         fontSize={properties.font.size}
         currency={settings.currency}
-        value={priceDiscounted?.value?.length ? priceDiscounted.value?.[0] : properties.exampleContent}
+        value={discountedValue ?? properties.exampleContent}
         type={properties.format.isEnable ? properties.format.type : undefined}
       />
     </div>

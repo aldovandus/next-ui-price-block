@@ -378,6 +378,7 @@ export function Dashboard() {
                   key={currentPriceBlockIndex}
                   priceBlockJson={priceBlocks[currentPriceBlockIndex].jsonConf}
                   gridSize={10}
+                  fullPriceValue="100.40"
                   discount="30%"
                 />
               )}

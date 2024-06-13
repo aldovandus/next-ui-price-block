@@ -29,7 +29,7 @@ const FullPricePreview = ({ settings, properties }: Props) => {
   const boxStyle = useBoxStyle({ box: properties?.box });
   const fontStyle = useFontStyle({ font: properties?.font });
 
-  const priceOriginal = usePriceBlockStore((state) => state.priceOriginal);
+  const fullPriceValue = usePriceBlockStore((state) => state.fullPriceValue);
 
   const getStyle = useMemo((): CSSProperties => {
     return { ...boxStyle, ...fontStyle };
@@ -58,7 +58,7 @@ const FullPricePreview = ({ settings, properties }: Props) => {
         showCurrency={properties.showCurrency}
         fontSize={properties.font.size}
         currency={settings?.currency}
-        value={priceOriginal?.value?.length ? priceOriginal.value?.[0] : properties.exampleContent}
+        value={fullPriceValue ?? properties.exampleContent}
       />
     </div>
   );
