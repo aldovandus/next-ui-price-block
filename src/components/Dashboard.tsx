@@ -7,8 +7,7 @@ import DynamicPriceBlock from "./DynamicPriceBlock";
 import { PriceBlock } from "@/types/price-block";
 import { useState, useEffect } from "react";
 import { usePriceBlockStore } from "@/zustand/price-block-store";
-//import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-//const url = "http://localhost:3000/api/price-block/get-price-blocks";
+
 const url = "https://staging.dacnl39nyabtl.amplifyapp.com/api/price-block/get-price-blocks";
 
 const getPriceBlocks = async () => {
@@ -29,9 +28,16 @@ export function Dashboard() {
   const gridSize = usePriceBlockStore((state) => state.gridSize);
   const numRows = usePriceBlockStore((state) => state.numRows);
   const numCols = usePriceBlockStore((state) => state.numCols);
+  const isLoading = usePriceBlockStore((state) => state.isLoading);
 
   useEffect(() => {
-    getPriceBlocks().then((res) => setPriceBlocks(res));
+    usePriceBlockStore.getState().setLoading(true);
+
+    getPriceBlocks()
+      .then((res) => setPriceBlocks(res))
+      .finally(() => {
+        usePriceBlockStore.getState().setLoading(false);
+      });
   }, []);
 
   return (
@@ -233,6 +239,7 @@ export function Dashboard() {
                 <div className="grid gap-3">
                   <Label htmlFor="model">Current PriceBlock</Label>
                   <Select
+                    disabled={isLoading}
                     onValueChange={(e) => {
                       console.log({ e });
                       setCurrentPriceBlockIndex(parseInt(e));
