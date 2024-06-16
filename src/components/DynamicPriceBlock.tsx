@@ -24,9 +24,23 @@ interface Props {
   fullPriceValue?: string;
   discountedValue?: string;
   discount?: string;
+  textCustom1?: string;
+  textCustom2?: string;
+  textCustom3?: string;
 }
 
-const DynamicPriceBlock = ({ priceBlockJson, gridSize, numRows = 8, numCols = 8, discount, fullPriceValue, discountedValue }: Props) => {
+const DynamicPriceBlock = ({
+  priceBlockJson,
+  gridSize,
+  numRows = 8,
+  numCols = 8,
+  discount,
+  fullPriceValue,
+  discountedValue,
+  textCustom1,
+  textCustom2,
+  textCustom3
+}: Props) => {
   const gridSizeValue = usePriceBlockStore((state) => state.gridSize);
   /* const numRowsValue = usePriceBlockStore((state) => state.numRows);
   const numColsValue = usePriceBlockStore((state) => state.numCols); */
@@ -48,8 +62,8 @@ const DynamicPriceBlock = ({ priceBlockJson, gridSize, numRows = 8, numCols = 8,
     if (gridSize) usePriceBlockStore.setState({ gridSize });
     /* if (numRows) usePriceBlockStore.setState({ numRows });
     if (numCols) usePriceBlockStore.setState({ numCols }); */
-    usePriceBlockStore.setState({ discount, fullPriceValue, discountedValue });
-  }, [discount, discountedValue, fullPriceValue, gridSize, numCols, numRows]);
+    usePriceBlockStore.setState({ discount, fullPriceValue, discountedValue, textCustom1, textCustom2, textCustom3 });
+  }, [discount, discountedValue, fullPriceValue, gridSize, numCols, numRows, textCustom1, textCustom2, textCustom3]);
 
   if (!priceBlockJson) return null;
   return (

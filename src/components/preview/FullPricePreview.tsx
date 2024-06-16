@@ -58,7 +58,7 @@ const FullPricePreview = ({ settings, properties }: Props) => {
         showCurrency={properties.showCurrency}
         fontSize={properties.font.size}
         currency={settings?.currency}
-        value={fullPriceValue ?? properties.exampleContent}
+        value={fullPriceValue ? parseFloat(fullPriceValue) : properties.exampleContent}
       />
     </div>
   );

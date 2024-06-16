@@ -26,7 +26,7 @@ const DiscountedPreview = ({ settings, properties }: { settings: IPriceBlockSett
         showCurrency={properties.showCurrency}
         fontSize={properties.font.size}
         currency={settings.currency}
-        value={discountedValue ?? properties.exampleContent}
+        value={discountedValue ? parseFloat(discountedValue) : properties.exampleContent}
         type={properties.format.isEnable ? properties.format.type : undefined}
       />
     </div>
