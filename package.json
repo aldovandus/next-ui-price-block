@@ -15,12 +15,12 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
+      "import": "./index.ts",
+      "require": "./index.ts"
     }
   },
   "files": [
-    "./dist"
+    "./"
   ],
   "publishConfig": {
     "access": "public"
