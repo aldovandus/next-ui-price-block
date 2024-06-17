@@ -60,8 +60,8 @@ const DynamicPriceBlock = ({
 
   useEffect(() => {
     if (gridSize) usePriceBlockStore.setState({ gridSize });
-    /* if (numRows) usePriceBlockStore.setState({ numRows });
-    if (numCols) usePriceBlockStore.setState({ numCols }); */
+    if (numRows) usePriceBlockStore.setState({ numRows });
+    if (numCols) usePriceBlockStore.setState({ numCols });
     usePriceBlockStore.setState({ discount, fullPriceValue, discountedValue, textCustom1, textCustom2, textCustom3 });
   }, [discount, discountedValue, fullPriceValue, gridSize, numCols, numRows, textCustom1, textCustom2, textCustom3]);
 
