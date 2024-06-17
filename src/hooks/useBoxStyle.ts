@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { getProportionedSize } from "./get-proportioned-size";
-import { IPriceBlockBox } from "@/components/types";
+import { IPriceBlockBox } from "../components/types";
 
 interface IUseBoxStyleProps {
   box: IPriceBlockBox | undefined;
