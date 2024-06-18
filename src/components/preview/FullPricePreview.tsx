@@ -39,12 +39,14 @@ const FullPricePreview = ({ settings, properties }: Props) => {
 
   const renderCrossedLine = useMemo(() => {
     if (!properties?.showCrossedLine) return null;
-    const style = {
+    const style: CSSProperties = {
       backgroundColor: properties.font.color,
       transform: `rotate(${properties.rotateCrossedLine ?? ""}deg)`,
-      height: `${properties.crossedLineHeight}px`
+      height: `${properties.crossedLineHeight}px`,
+      width: "90%",
+      position: "absolute"
     };
-    return <div className="absolute w-[90%]" style={style}></div>;
+    return <div style={style}></div>;
   }, [properties]);
 
   if (!properties) return null;
