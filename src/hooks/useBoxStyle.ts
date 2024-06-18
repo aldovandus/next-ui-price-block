@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
+import type { IPriceBlockBox } from "../components/types";
 import { getProportionedSize } from "./get-proportioned-size";
-import { IPriceBlockBox } from "../components/types";
 
 interface IUseBoxStyleProps {
   box: IPriceBlockBox | undefined;
@@ -51,10 +51,10 @@ const useBoxStyle = ({ box }: IUseBoxStyleProps): CSSProperties => {
   if (box?.border?.radius) {
     style = {
       ...style,
-      borderTopLeftRadius: box.border.radius.tl ?? "0px",
-      borderTopRightRadius: box.border.radius.tr ?? "0px",
-      borderBottomLeftRadius: box.border.radius.bl ?? "0px",
-      borderBottomRightRadius: box.border.radius.br ?? "0px"
+      borderTopLeftRadius: box.border.radius.tl ? getProportionedSize(box.border.radius.tl) : "0px",
+      borderTopRightRadius: box.border.radius.tr ? getProportionedSize(box.border.radius.tr) : "0px",
+      borderBottomLeftRadius: box.border.radius.bl ? getProportionedSize(box.border.radius.bl) : "0px",
+      borderBottomRightRadius: box.border.radius.br ? getProportionedSize(box.border.radius.br) : "0px"
     };
   }
 
