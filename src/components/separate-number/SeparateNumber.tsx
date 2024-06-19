@@ -42,7 +42,7 @@ const SeparateNumber = ({
 }: ISeparateNumberProps) => {
   const containerClass = classNames(classes?.containerClass, "flex");
   /* We need to create an hook */
-  const valueString = value.toLocaleString("it-IT", { minimumIntegerDigits: 1, minimumFractionDigits: 2 }).split(".");
+  const valueString = value.toLocaleString("it-IT", { minimumIntegerDigits: 1, minimumFractionDigits: 2 }).split(decimalSeparator);
   const integerPart = valueString[0]?.replace(".", thousandSeparator);
   const decimalPart = valueString[1];
 
