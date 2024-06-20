@@ -25,14 +25,14 @@ const useFormattedCurrencyStyle = ({ className, fontSize, type }: Props) => {
   const isType4 = type == PriceFormatType.TYPE4;
 
   const containerClass = classNames(className, { "items-end": isType1 }, { "items-center": isType4 || isType3 });
-  const decimalClass = classNames("flex gap-2", { "flex-col-reverse  flex-col": isType3 });
+  const decimalClass = classNames("flex gap-1", { "flex-col-reverse  flex-col": isType3 });
   const integerStyle: CSSProperties = {
     fontSize: `${getProportionedSize(fontSize)}`,
     lineHeight: isType3 ? `calc(${getProportionedSize(fontSize)} - 10%)` : undefined
   };
   const decimalContainerStyle: CSSProperties = { lineHeight: isType3 ? `calc(${getProportionedSize(fontSize)} - 60%)` : undefined };
-  const currencyStyle: CSSProperties = { fontSize: `calc(${getProportionedSize(fontSize)} - 60%)` };
-  const decimalStyle = { fontSize: `calc(${getProportionedSize(fontSize)} - 45%)` };
+  const currencyStyle: CSSProperties = { fontSize: `calc(${getProportionedSize(fontSize)} - 25%)` };
+  const decimalStyle = { fontSize: `calc(${getProportionedSize(fontSize)} - 25%)` };
 
   return {
     containerClass,
