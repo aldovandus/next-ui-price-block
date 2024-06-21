@@ -156,6 +156,8 @@ export function Dashboard() {
                     gridSize={10}
                     fullPriceValue="100.40"
                     discount="30%"
+                    discountedValue="44,90"
+                    fontsUrl={priceBlocks[currentPriceBlockIndex].jsonConf.settings.fontsUrl}
                   />
                 )
               )}

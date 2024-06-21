@@ -24,6 +24,7 @@ interface Props {
   fullPriceValue?: string;
   discountedValue?: string;
   discount?: string;
+  fontsUrl?: string;
   textCustom1?: string;
   textCustom2?: string;
   textCustom3?: string;
@@ -35,6 +36,7 @@ const DynamicPriceBlock = ({
   numRows = 8,
   numCols = 8,
   discount,
+  fontsUrl,
   fullPriceValue,
   discountedValue,
   textCustom1,
@@ -42,9 +44,6 @@ const DynamicPriceBlock = ({
   textCustom3
 }: Props) => {
   const gridSizeValue = usePriceBlockStore((state) => state.gridSize);
-  /* const numRowsValue = usePriceBlockStore((state) => state.numRows);
-  const numColsValue = usePriceBlockStore((state) => state.numCols); */
-  console.log(priceBlockJson);
 
   const background = priceBlockJson.settings.background;
 
@@ -59,11 +58,25 @@ const DynamicPriceBlock = ({
   }, [background.color, background.type, background.url]);
 
   useEffect(() => {
-    if (gridSize) usePriceBlockStore.setState({ gridSize });
+    /*     if (gridSize) usePriceBlockStore.setState({ gridSize });
     if (numRows) usePriceBlockStore.setState({ numRows });
     if (numCols) usePriceBlockStore.setState({ numCols });
-    usePriceBlockStore.setState({ discount, fullPriceValue, discountedValue, textCustom1, textCustom2, textCustom3 });
-  }, [discount, discountedValue, fullPriceValue, gridSize, numCols, numRows, textCustom1, textCustom2, textCustom3]);
+    usePriceBlockStore.setState({ discount, fullPriceValue, discountedValue, textCustom1, textCustom2, textCustom3 }); */
+    usePriceBlockStore
+      .getState()
+      .initPriceBlockReader({
+        gridSize,
+        numRows,
+        numCols,
+        fontsUrl,
+        discount,
+        fullPriceValue,
+        discountedValue,
+        textCustom1,
+        textCustom2,
+        textCustom3
+      });
+  }, [discount, discountedValue, fontsUrl, fullPriceValue, gridSize, numCols, numRows, textCustom1, textCustom2, textCustom3]);
 
   if (!priceBlockJson) return null;
   return (
