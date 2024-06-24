@@ -20,7 +20,7 @@ const useFormattedCurrencyStyle = ({ className, fontSize, type }: Props) => {
     };
 
   const isType1 = type == PriceFormatType.TYPE1;
-  const isType2 = type == PriceFormatType.TYPE2;
+  //const isType2 = type == PriceFormatType.TYPE2;
   const isType3 = type == PriceFormatType.TYPE3;
   const isType4 = type == PriceFormatType.TYPE4;
 
