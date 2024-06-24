@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import DynamicPriceBlock from "../../index";
+import DynamicPriceBlock from "./DynamicPriceBlock";
 import { PriceBlock } from "@/types/price-block";
 import { useState, useEffect } from "react";
 import { usePriceBlockStore } from "@/zustand/price-block-store";
