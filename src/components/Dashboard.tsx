@@ -1,3 +1,4 @@
+import "../index.css";
 import { Badge } from "@/components/ui/badge";
 //import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
@@ -5,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import DynamicPriceBlock from "./DynamicPriceBlock";
 import { PriceBlock } from "@/types/price-block";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePriceBlockStore } from "@/zustand/price-block-store";
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "./ui/button";
