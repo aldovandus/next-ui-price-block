@@ -46,7 +46,7 @@ const DynamicPriceBlock = ({
 }: Props) => {
   const gridSizeValue = usePriceBlockStore((state) => state.gridSize);
 
-  const background = priceBlockJson.settings.background;
+  const background = priceBlockJson?.settings?.background;
 
   const getBackground = useMemo(() => {
     if (background.type == "image") {
@@ -56,7 +56,7 @@ const DynamicPriceBlock = ({
     } else {
       return "none";
     }
-  }, [background.color, background.type, background.url]);
+  }, [background?.color, background?.type, background?.url]);
 
   useEffect(() => {
     /*     if (gridSize) usePriceBlockStore.setState({ gridSize });
