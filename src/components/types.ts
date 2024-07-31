@@ -100,7 +100,6 @@ interface IBadgeProperties {
 }
 
 interface IFullPriceProperties {
-  exampleContent: number;
   showCurrency: boolean;
   font: IPriceBlockFont;
   showCrossedLine: boolean;
@@ -110,13 +109,11 @@ interface IFullPriceProperties {
 }
 
 interface IDiscountProperties {
-  exampleContent: string;
   font: IPriceBlockFont;
   box?: IPriceBlockBox;
 }
 
 interface IDiscountedProperties {
-  exampleContent: number;
   showCurrency: boolean;
   format: IPriceBlockFormat;
   font: IPriceBlockFont;
@@ -125,7 +122,6 @@ interface IDiscountedProperties {
 }
 
 interface ICustomFieldProperties {
-  exampleContent: string;
   font: IPriceBlockFont;
   box?: IPriceBlockBox;
 }

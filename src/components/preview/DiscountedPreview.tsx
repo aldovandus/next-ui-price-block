@@ -24,7 +24,7 @@ const DiscountedPreview = ({
     return { ...boxStyle, ...fontStyle };
   }, [boxStyle, fontStyle]);
 
-  if (!properties) return null;
+  if (!properties || !discountedValue) return null;
 
   return (
     <div className={'flex h-full w-full flex-col justify-center'} style={getStyle}>
@@ -34,7 +34,7 @@ const DiscountedPreview = ({
         showCurrency={properties.showCurrency}
         fontSize={properties.font.size}
         currency={settings.currency}
-        value={discountedValue ? parseFloat(discountedValue) : properties.exampleContent}
+        value={parseFloat(discountedValue)}
         type={properties.format.isEnable ? properties.format.type : undefined}
       />
     </div>

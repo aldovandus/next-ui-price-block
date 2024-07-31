@@ -230,6 +230,9 @@ export function Dashboard() {
                     discount="30%"
                     discountedValue="44,90"
                     fontsUrl={priceBlocks[currentPriceBlockIndex].jsonConf.settings.fontsUrl}
+                    textCustom1="textCustom1"
+                    textCustom2="textCustom2"
+                    textCustom3="textCustom3"
                   />
                 )
               )}

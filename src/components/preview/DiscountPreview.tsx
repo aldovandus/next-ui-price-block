@@ -17,11 +17,11 @@ const DiscountPreview = ({ elementKey, properties }: { elementKey: string; prope
     return { ...boxStyle, ...fontStyle };
   }, [boxStyle, fontStyle]);
 
-  if (!properties) return null;
+  if (!properties || !discount) return null;
 
   return (
     <div className={classNames('flex h-full w-full flex-col justify-center')} style={getStyle}>
-      <div dangerouslySetInnerHTML={{ __html: discount ?? properties.exampleContent }} />
+      <div dangerouslySetInnerHTML={{ __html: discount }} />
     </div>
   );
 };

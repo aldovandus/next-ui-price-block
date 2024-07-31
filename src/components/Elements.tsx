@@ -83,8 +83,8 @@ const Elements = ({ elementKey, elements, settings }: { elementKey: string; elem
   }, []); */
   return (
     <div className="h-full w-full  ">
-      {Object.keys(elements).map((keyElement) => {
-        const element = elements[keyElement as PriceBlockElementKey];
+      {Object.keys(elements).map((elementKeyIndex) => {
+        const element = elements[elementKeyIndex as PriceBlockElementKey];
 
         return (
           <Item
@@ -92,8 +92,8 @@ const Elements = ({ elementKey, elements, settings }: { elementKey: string; elem
             properties={element?.properties}
             item={element}
             settings={settings}
-            key={`${elementKey}_${keyElement}`}
-            id={keyElement as PriceBlockElementKey}
+            key={`${elementKey}_${elementKeyIndex}`}
+            id={elementKeyIndex as PriceBlockElementKey}
           />
         );
       })}

@@ -48,7 +48,7 @@ const FullPricePreview = ({ elementKey, settings, properties }: Props) => {
     return <div style={style}></div>;
   }, [properties]);
 
-  if (!properties) return null;
+  if (!properties || !fullPriceValue) return null;
 
   return (
     <div className={classNames('flex h-full w-full flex-col justify-center', { relative: properties.showCrossedLine })} style={getStyle}>
@@ -59,7 +59,7 @@ const FullPricePreview = ({ elementKey, settings, properties }: Props) => {
         showCurrency={properties.showCurrency}
         fontSize={properties.font.size}
         currency={settings?.currency}
-        value={fullPriceValue ? parseFloat(fullPriceValue) : properties.exampleContent}
+        value={parseFloat(fullPriceValue)}
       />
     </div>
   );
