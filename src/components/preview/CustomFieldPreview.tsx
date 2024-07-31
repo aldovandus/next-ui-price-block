@@ -4,7 +4,7 @@ import useBoxStyle from '../../hooks/useBoxStyle';
 import useFontStyle from '../../hooks/useFontStyle';
 import classNames from 'classnames';
 import { ICustomFieldProperties, PriceBlockElementKey } from '../types';
-import { usePriceBlockStore } from '@/zustand/price-block-store';
+import { usePriceBlockStore } from '../../zustand/price-block-store';
 
 const CustomFieldPreview = ({
   id,

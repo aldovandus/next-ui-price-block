@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import DynamicPriceBlock from './DynamicPriceBlock';
 import { PriceBlock } from '@/types/price-block';
 import { useState } from 'react';
-import { usePriceBlockStore } from '@/zustand/price-block-store';
+import { usePriceBlockStore } from '../zustand/price-block-store';
 import { Skeleton } from './ui/skeleton';
 import { Button } from './ui/button';
 
