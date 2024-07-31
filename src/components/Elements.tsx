@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 //import usePriceBlockStore from '@/zustand/price-block/priceBlock';
-import { CSSProperties, FC, useMemo } from "react";
+import { CSSProperties, FC, useMemo } from 'react';
 import {
   IGenericPreviewProps,
   IPriceBlockElement,
   IPriceBlockElements,
   IPriceBlockSettings,
   PriceBlockElementKey,
-  PriceBlockGenericProperties
-} from "./types";
-import FullPricePreview from "./preview/FullPricePreview";
-import DiscountedPreview from "./preview/DiscountedPreview";
-import DiscountPreview from "./preview/DiscountPreview";
-import CustomFieldPreview from "./preview/CustomFieldPreview";
-import BadgePreview from "./preview/BadgePreview";
-import { usePriceBlockStore } from "../zustand/price-block-store";
+  PriceBlockGenericProperties,
+} from './types';
+import FullPricePreview from './preview/FullPricePreview';
+import DiscountedPreview from './preview/DiscountedPreview';
+import DiscountPreview from './preview/DiscountPreview';
+import CustomFieldPreview from './preview/CustomFieldPreview';
+import BadgePreview from './preview/BadgePreview';
+import { usePriceBlockStore } from '../zustand/price-block-store';
 //import DraggableItem from '../DraggableItem';
 //import { PriceBlockElementKey } from '../types';
 //import { GRID_SIZE, NUM_COLUMNS, NUM_COLUMNS_BADGE, NUM_ROWS } from '../PriceBlockGrid';
@@ -35,7 +35,7 @@ const lookupContent: Partial<LookupElement> = {
   [PriceBlockElementKey.BADGE]: BadgePreview,
   [PriceBlockElementKey.CUSTOMFIELD_1]: CustomFieldPreview,
   [PriceBlockElementKey.CUSTOMFIELD_2]: CustomFieldPreview,
-  [PriceBlockElementKey.CUSTOMFIELD_3]: CustomFieldPreview
+  [PriceBlockElementKey.CUSTOMFIELD_3]: CustomFieldPreview,
 };
 
 // Props for the Item component
@@ -44,6 +44,7 @@ interface ItemProps {
   item?: IPriceBlockElement<any>;
   settings: IPriceBlockSettings;
   properties?: PriceBlockGenericProperties;
+  elementKey: string;
 }
 
 const Item = (props: ItemProps) => {
@@ -55,12 +56,12 @@ const Item = (props: ItemProps) => {
     if (!item) return {};
     const { position } = item;
     return {
-      position: "absolute",
+      position: 'absolute',
       bottom: (numRows - position.rowEnd) * gridSize,
       left: position.colStart * gridSize,
       width: (position.colEnd - position.colStart) * gridSize,
       height: (position.rowEnd - position.rowStart) * gridSize,
-      zIndex: item.layer
+      zIndex: item.layer,
     };
   }, [gridSize, item, numRows]);
 
@@ -73,7 +74,7 @@ const Item = (props: ItemProps) => {
   );
 };
 
-const Elements = ({ elements, settings }: { elements: IPriceBlockElements; settings: IPriceBlockSettings }) => {
+const Elements = ({ elementKey, elements, settings }: { elementKey: string; elements: IPriceBlockElements; settings: IPriceBlockSettings }) => {
   /*   const style = useMemo(() => {
     return {
       height: NUM_ROWS * GRID_SIZE,
@@ -85,7 +86,16 @@ const Elements = ({ elements, settings }: { elements: IPriceBlockElements; setti
       {Object.keys(elements).map((keyElement) => {
         const element = elements[keyElement as PriceBlockElementKey];
 
-        return <Item properties={element?.properties} item={element} settings={settings} key={keyElement} id={keyElement as PriceBlockElementKey} />;
+        return (
+          <Item
+            elementKey={elementKey}
+            properties={element?.properties}
+            item={element}
+            settings={settings}
+            key={`${elementKey}_${keyElement}`}
+            id={keyElement as PriceBlockElementKey}
+          />
+        );
       })}
     </div>
   );

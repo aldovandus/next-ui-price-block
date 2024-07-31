@@ -1,29 +1,29 @@
-import "../index.css";
-import { Badge } from "@/components/ui/badge";
+import '../index.css';
+import { Badge } from '@/components/ui/badge';
 //import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import DynamicPriceBlock from "./DynamicPriceBlock";
-import { PriceBlock } from "@/types/price-block";
-import { useState } from "react";
-import { usePriceBlockStore } from "@/zustand/price-block-store";
-import { Skeleton } from "./ui/skeleton";
-import { Button } from "./ui/button";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import DynamicPriceBlock from './DynamicPriceBlock';
+import { PriceBlock } from '@/types/price-block';
+import { useState } from 'react';
+import { usePriceBlockStore } from '@/zustand/price-block-store';
+import { Skeleton } from './ui/skeleton';
+import { Button } from './ui/button';
 
 const enviroments = [
   {
     id: 1,
-    country: "Italy",
-    env: "staging",
-    url: "https://staging.dacnl39nyabtl.amplifyapp.com"
+    country: 'Italy',
+    env: 'staging',
+    url: 'https://staging.dacnl39nyabtl.amplifyapp.com',
   },
   {
     id: 2,
-    country: "Italy",
-    env: "prod",
-    url: "https://environments-it.dacnl39nyabtl.amplifyapp.com"
-  }
+    country: 'Italy',
+    env: 'prod',
+    url: 'https://environments-it.dacnl39nyabtl.amplifyapp.com',
+  },
 ];
 
 //const url = "https://staging.dacnl39nyabtl.amplifyapp.com/api/price-block/get-price-blocks";
@@ -222,6 +222,7 @@ export function Dashboard() {
               ) : (
                 priceBlocks.length > 0 && (
                   <DynamicPriceBlock
+                    elementKey="test_price_block"
                     key={currentPriceBlockIndex}
                     priceBlockJson={priceBlocks[currentPriceBlockIndex].jsonConf}
                     gridSize={10}
