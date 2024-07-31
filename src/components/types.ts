@@ -1,33 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-type Currency = "€" | "$" | "£";
+type Currency = '€' | '$' | '£';
 
 enum FontStyle {
-  NORMAL = "normal",
-  ITALIC = "italic",
-  BOLD = "bold"
+  NORMAL = 'normal',
+  ITALIC = 'italic',
+  BOLD = 'bold',
 }
 
 enum PriceFormatType {
-  TYPE1 = "type1",
-  TYPE2 = "type2",
-  TYPE3 = "type3",
-  TYPE4 = "type4"
+  TYPE1 = 'type1',
+  TYPE2 = 'type2',
+  TYPE3 = 'type3',
+  TYPE4 = 'type4',
 }
 
 enum AlignText {
-  RIGHT = "right",
-  CENTER = "center",
-  LEFT = "left"
+  RIGHT = 'right',
+  CENTER = 'center',
+  LEFT = 'left',
 }
 
 enum PriceBlockElementKey {
-  FULLPRICE = "fullPrice",
-  DISCOUNT = "discount",
-  DISCOUNTED = "discounted",
-  BADGE = "badge",
-  CUSTOMFIELD_1 = "customfield_1",
-  CUSTOMFIELD_2 = "customfield_2",
-  CUSTOMFIELD_3 = "customfield_3"
+  FULLPRICE = 'fullPrice',
+  DISCOUNT = 'discount',
+  DISCOUNTED = 'discounted',
+  BADGE = 'badge',
+  CUSTOMFIELD_1 = 'customfield_1',
+  CUSTOMFIELD_2 = 'customfield_2',
+  CUSTOMFIELD_3 = 'customfield_3',
 }
 
 interface IPriceBlockPosition {
@@ -155,13 +155,14 @@ interface IPriceBlockSettings {
     thousand: string;
   };
   background: {
-    type: "image" | "color" | "nothing";
+    type: 'image' | 'color' | 'nothing';
     color?: string;
     url?: string;
   };
 }
 
 interface IGenericPreviewProps {
+  elementKey: string;
   settings: IPriceBlockSettings;
   properties: any; // Puoi sostituire 'any' con un tipo più specifico se conosci la struttura di 'properties'
 }
@@ -182,6 +183,6 @@ export type {
   IDiscountProperties,
   IDiscountedProperties,
   ICustomFieldProperties,
-  PriceBLockForSave
+  PriceBLockForSave,
 };
 export { PriceFormatType, PriceBlockElementKey, FontStyle, AlignText };

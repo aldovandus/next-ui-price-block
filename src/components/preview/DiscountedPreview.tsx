@@ -1,16 +1,24 @@
-import type { IDiscountedProperties, IPriceBlockSettings } from "../types";
-import type { CSSProperties } from "react";
-import { useMemo } from "react";
-import useBoxStyle from "../../hooks/useBoxStyle";
-import useFontStyle from "../../hooks/useFontStyle";
-import SeparateNumberFormatted from "../separate-number-formatted/SeparateNumberFormatted";
-import { usePriceBlockStore } from "../../zustand/price-block-store";
+import type { IDiscountedProperties, IPriceBlockSettings } from '../types';
+import type { CSSProperties } from 'react';
+import { useMemo } from 'react';
+import useBoxStyle from '../../hooks/useBoxStyle';
+import useFontStyle from '../../hooks/useFontStyle';
+import SeparateNumberFormatted from '../separate-number-formatted/SeparateNumberFormatted';
+import { usePriceBlockStore } from '../../zustand/price-block-store';
 
-const DiscountedPreview = ({ settings, properties }: { settings: IPriceBlockSettings; properties: IDiscountedProperties }) => {
+const DiscountedPreview = ({
+  elementKey,
+  settings,
+  properties,
+}: {
+  elementKey: string;
+  settings: IPriceBlockSettings;
+  properties: IDiscountedProperties;
+}) => {
   //const element = priceBlockElements[PriceBlockElementKey.DISCOUNTED] as IPriceBlockElement<IDiscountedProperties>;
   const boxStyle = useBoxStyle({ box: properties.box });
   const fontStyle = useFontStyle({ font: properties.font });
-  const discountedValue = usePriceBlockStore((state) => state.discountedValue);
+  const discountedValue = usePriceBlockStore((state) => state.dataComp[elementKey]?.discountedValue);
 
   const getStyle = useMemo((): CSSProperties => {
     return { ...boxStyle, ...fontStyle };
@@ -19,7 +27,7 @@ const DiscountedPreview = ({ settings, properties }: { settings: IPriceBlockSett
   if (!properties) return null;
 
   return (
-    <div className={"flex h-full w-full flex-col justify-center"} style={getStyle}>
+    <div className={'flex h-full w-full flex-col justify-center'} style={getStyle}>
       <SeparateNumberFormatted
         thousandSeparator={settings.separator.thousand}
         decimalSeparator={settings.separator.decimal}
