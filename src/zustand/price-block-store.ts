@@ -54,7 +54,6 @@ const getExtraFonts = async (url: string) => {
   const cssText = await res.text();
   const cssJson = cssToJson(cssText);
   addCssToDocument(cssText);
-  console.log(JSON.stringify(cssJson, null, 2));
   return cssJson;
 };
 

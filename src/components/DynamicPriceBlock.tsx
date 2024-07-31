@@ -46,8 +46,6 @@ const DynamicPriceBlock = ({
   textCustom2,
   textCustom3,
 }: Props) => {
-  const dataComp = usePriceBlockStore((state) => state.dataComp);
-  console.log(dataComp);
   const gridSizeValue = usePriceBlockStore((state) => state.gridSize);
 
   const background = priceBlockJson?.settings?.background;

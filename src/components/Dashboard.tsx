@@ -78,7 +78,7 @@ export function Dashboard() {
                   <Select
                     disabled={isLoading}
                     onValueChange={(e) => {
-                      console.log({ e });
+                      console.error({ e });
                       setCurrentPriceBlockIndex(parseInt(e));
                     }}
                   >

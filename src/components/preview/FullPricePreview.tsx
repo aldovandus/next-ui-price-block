@@ -36,8 +36,6 @@ const FullPricePreview = ({ elementKey, settings, properties }: Props) => {
     return { ...boxStyle, ...fontStyle };
   }, [boxStyle, fontStyle]);
 
-  console.log({ fontStyle });
-
   const renderCrossedLine = useMemo(() => {
     if (!properties?.showCrossedLine) return null;
     const style: CSSProperties = {
