@@ -19,7 +19,7 @@ const UnitTypePreview = ({ elementKey, properties }: IGenericPreviewProps) => {
 
   return (
     <div className={classNames("flex h-full w-full flex-col justify-center")} style={getStyle}>
-      <div dangerouslySetInnerHTML={{ __html: properties.exampleContent }} />
+      <div dangerouslySetInnerHTML={{ __html: unitType }} />
     </div>
   );
 };

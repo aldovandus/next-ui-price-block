@@ -12,6 +12,7 @@ interface Props {
   fullPriceValue?: string;
   discountedValue?: string;
   discount?: string;
+  unitType?: string;
   fontsUrl?: string;
   textCustom?: { id: string; value: string }[];
 }
@@ -26,6 +27,7 @@ const DynamicPriceBlock = ({
   fontsUrl,
   fullPriceValue,
   discountedValue,
+  unitType,
   textCustom
 }: Props) => {
   const gridSizeValue = usePriceBlockStore((state) => state.gridSize);
@@ -55,9 +57,10 @@ const DynamicPriceBlock = ({
       discount,
       fullPriceValue,
       discountedValue,
+      unitType,
       textCustom
     });
-  }, [discount, discountedValue, elementKey, fontsUrl, fullPriceValue, gridSize, numCols, numRows, textCustom]);
+  }, [discount, discountedValue, elementKey, fontsUrl, fullPriceValue, gridSize, numCols, numRows, textCustom, unitType]);
 
   if (!priceBlockJson) return null;
   return (

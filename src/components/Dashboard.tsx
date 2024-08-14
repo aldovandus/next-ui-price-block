@@ -49,16 +49,6 @@ export function Dashboard() {
   const numCols = usePriceBlockStore((state) => state.numCols);
   const isLoading = usePriceBlockStore((state) => state.isLoading);
 
-  /* useEffect(() => {
-    usePriceBlockStore.getState().setLoading(true);
-
-    getPriceBlocks()
-      .then((res) => setPriceBlocks(res))
-      .finally(() => {
-        usePriceBlockStore.getState().setLoading(false);
-      });
-  }, []); */
-
   const example = {
     textCustom1: "testo 1",
     textCustom2: "testo 2",
@@ -71,8 +61,6 @@ export function Dashboard() {
       const customFieldKey = `customfield_${key.replace("textCustom", "")}`;
       return { id: customFieldKey, value };
     });
-
-  console.log({ customFields });
 
   return (
     <div className="grid h-screen w-full pl-[56px]">
@@ -243,6 +231,7 @@ export function Dashboard() {
                     discount="30%"
                     discountedValue="44,90"
                     fontsUrl={priceBlocks[currentPriceBlockIndex].jsonConf.settings.fontsUrl}
+                    unitType="al kg"
                     textCustom={customFields}
                   />
                 )

@@ -74,7 +74,7 @@ const usePriceBlockStore = create<PriceBlockStoreState>((set, get) => ({
   dataComp: {},
 
   initPriceBlockReader: async (elementKey, state: any) => {
-    const { gridSize, numRows, numCols, fontsUrl, discount, fullPriceValue, discountedValue, textCustom } = state;
+    const { gridSize, numRows, numCols, fontsUrl, discount, fullPriceValue, discountedValue, unitType, textCustom } = state;
 
     if (fontsUrl) {
       await getExtraFonts(fontsUrl);
@@ -84,7 +84,7 @@ const usePriceBlockStore = create<PriceBlockStoreState>((set, get) => ({
       gridSize,
       numRows,
       numCols,
-      dataComp: { ...get().dataComp, [elementKey]: { discount, fullPriceValue, discountedValue, textCustom } }
+      dataComp: { ...get().dataComp, [elementKey]: { discount, fullPriceValue, discountedValue, unitType, textCustom } }
     });
   },
 

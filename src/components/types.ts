@@ -25,7 +25,7 @@ enum PriceBlockElementKey {
   DISCOUNT = "discount",
   DISCOUNTED = "discounted",
   BADGE = "badge",
-  UNIT_TYPE = "unit_type"
+  UNIT_TYPE = "unitType"
 }
 
 interface IPriceBlockPosition {
