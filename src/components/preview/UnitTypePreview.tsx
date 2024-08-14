@@ -1,35 +1,27 @@
+import { usePriceBlockStore } from "../../zustand/price-block-store";
 import type { CSSProperties } from "react";
 import { useMemo } from "react";
 import useBoxStyle from "../../hooks/useBoxStyle";
 import useFontStyle from "../../hooks/useFontStyle";
 import classNames from "classnames";
-import { ICustomFieldProperties, PriceBlockElementKey } from "../types";
-import { usePriceBlockStore } from "../../zustand/price-block-store";
+import type { IGenericPreviewProps } from "../types";
 
-const CustomFieldPreview = ({
-  id,
-  elementKey,
-  properties
-}: {
-  id?: PriceBlockElementKey;
-  elementKey: string;
-  properties: ICustomFieldProperties;
-}) => {
-  const currentCustomField = usePriceBlockStore((state) => state.getCurrentCustomField(elementKey, id));
+const UnitTypePreview = ({ elementKey, properties }: IGenericPreviewProps) => {
+  const unitType = usePriceBlockStore((state) => state.dataComp[elementKey]?.unitType);
 
   const boxStyle = useBoxStyle({ box: properties.box });
   const fontStyle = useFontStyle({ font: properties.font });
-
   const getStyle = useMemo((): CSSProperties => {
     return { ...boxStyle, ...fontStyle };
   }, [boxStyle, fontStyle]);
 
-  if (!currentCustomField) return null;
+  if (!unitType || !properties) return null;
+
   return (
     <div className={classNames("flex h-full w-full flex-col justify-center")} style={getStyle}>
-      <div dangerouslySetInnerHTML={{ __html: currentCustomField?.value }} />
+      <div dangerouslySetInnerHTML={{ __html: properties.exampleContent }} />
     </div>
   );
 };
 
-export default CustomFieldPreview;
+export default UnitTypePreview;

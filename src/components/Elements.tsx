@@ -1,20 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 //import usePriceBlockStore from '@/zustand/price-block/priceBlock';
-import { CSSProperties, FC, useMemo } from 'react';
+import { CSSProperties, FC, useMemo } from "react";
 import {
+  DynamicPriceBlockElementKey,
   IGenericPreviewProps,
   IPriceBlockElement,
   IPriceBlockElements,
   IPriceBlockSettings,
   PriceBlockElementKey,
-  PriceBlockGenericProperties,
-} from './types';
-import FullPricePreview from './preview/FullPricePreview';
-import DiscountedPreview from './preview/DiscountedPreview';
-import DiscountPreview from './preview/DiscountPreview';
-import CustomFieldPreview from './preview/CustomFieldPreview';
-import BadgePreview from './preview/BadgePreview';
-import { usePriceBlockStore } from '../zustand/price-block-store';
+  PriceBlockGenericProperties
+} from "./types";
+import FullPricePreview from "./preview/FullPricePreview";
+import DiscountedPreview from "./preview/DiscountedPreview";
+import DiscountPreview from "./preview/DiscountPreview";
+import CustomFieldPreview from "./preview/CustomFieldPreview";
+import BadgePreview from "./preview/BadgePreview";
+import { usePriceBlockStore } from "../zustand/price-block-store";
+import UnitTypePreview from "./preview/UnitTypePreview";
 //import DraggableItem from '../DraggableItem';
 //import { PriceBlockElementKey } from '../types';
 //import { GRID_SIZE, NUM_COLUMNS, NUM_COLUMNS_BADGE, NUM_ROWS } from '../PriceBlockGrid';
@@ -25,18 +27,27 @@ export const NUM_COLUMNS = 8; */
 export const NUM_COLUMNS_BADGE = 24;
 export const LIMIT_TOP_ROW_BADGE = -4;
 
-type LookupElement = { [key in PriceBlockElementKey]: FC<IGenericPreviewProps> };
+const customFieldIndex = 100;
+
+type LookupElement = { [key in DynamicPriceBlockElementKey]: FC<IGenericPreviewProps> };
 const lookupContent: Partial<LookupElement> = {
   [PriceBlockElementKey.FULLPRICE]: FullPricePreview,
-  [PriceBlockElementKey.DISCOUNTED]: DiscountedPreview,
   [PriceBlockElementKey.DISCOUNT]: DiscountPreview,
-  /* 	[PriceBlockElementKey.DISCOUNT]: DiscountPreview,
-	[PriceBlockElementKey.DISCOUNTED]: DiscountedPreview, */
+  [PriceBlockElementKey.DISCOUNTED]: DiscountedPreview,
   [PriceBlockElementKey.BADGE]: BadgePreview,
-  [PriceBlockElementKey.CUSTOMFIELD_1]: CustomFieldPreview,
-  [PriceBlockElementKey.CUSTOMFIELD_2]: CustomFieldPreview,
-  [PriceBlockElementKey.CUSTOMFIELD_3]: CustomFieldPreview,
+  [PriceBlockElementKey.UNIT_TYPE]: UnitTypePreview
+  /*  ["customfield_1"]: CustomFieldPreview,
+  ["customfield_2"]: CustomFieldPreview,
+  ["customfield_3"]: CustomFieldPreview,
+  ["customfield_10"]: CustomFieldPreview,
+  ["customfield_9"]: CustomFieldPreview,
+  ["customfield_6"]: CustomFieldPreview,
+  ["customfield_5"]: CustomFieldPreview */
 };
+
+for (let i = 0; i < customFieldIndex; i++) {
+  lookupContent[`customfield_${i}` as DynamicPriceBlockElementKey] = CustomFieldPreview;
+}
 
 // Props for the Item component
 interface ItemProps {
@@ -56,12 +67,12 @@ const Item = (props: ItemProps) => {
     if (!item) return {};
     const { position } = item;
     return {
-      position: 'absolute',
+      position: "absolute",
       bottom: (numRows - position.rowEnd) * gridSize,
       left: position.colStart * gridSize,
       width: (position.colEnd - position.colStart) * gridSize,
       height: (position.rowEnd - position.rowStart) * gridSize,
-      zIndex: item.layer,
+      zIndex: item.layer
     };
   }, [gridSize, item, numRows]);
 
@@ -81,6 +92,10 @@ const Elements = ({ elementKey, elements, settings }: { elementKey: string; elem
       width: NUM_COLUMNS * GRID_SIZE
     };
   }, []); */
+
+  /* return <div>{Object.keys(elements).map((item) => item.split("customfield_"))}</div>;
+
+  return <div>{JSON.stringify(Object.keys(elements))}</div>; */
   return (
     <div className="h-full w-full  ">
       {Object.keys(elements).map((elementKeyIndex) => {

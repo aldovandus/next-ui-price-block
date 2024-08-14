@@ -1,29 +1,29 @@
-import '../index.css';
-import { Badge } from '@/components/ui/badge';
+import "../index.css";
+import { Badge } from "@/components/ui/badge";
 //import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import DynamicPriceBlock from './DynamicPriceBlock';
-import { PriceBlock } from '@/types/price-block';
-import { useState } from 'react';
-import { usePriceBlockStore } from '../zustand/price-block-store';
-import { Skeleton } from './ui/skeleton';
-import { Button } from './ui/button';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import DynamicPriceBlock from "./DynamicPriceBlock";
+import { PriceBlock } from "@/types/price-block";
+import { useState } from "react";
+import { usePriceBlockStore } from "../zustand/price-block-store";
+import { Skeleton } from "./ui/skeleton";
+import { Button } from "./ui/button";
 
 const enviroments = [
   {
     id: 1,
-    country: 'Italy',
-    env: 'staging',
-    url: 'https://staging.dacnl39nyabtl.amplifyapp.com',
+    country: "Italy",
+    env: "staging",
+    url: "https://staging.dacnl39nyabtl.amplifyapp.com"
   },
   {
     id: 2,
-    country: 'Italy',
-    env: 'prod',
-    url: 'https://environments-it.dacnl39nyabtl.amplifyapp.com',
-  },
+    country: "Italy",
+    env: "prod",
+    url: "https://environments-it.dacnl39nyabtl.amplifyapp.com"
+  }
 ];
 
 //const url = "https://staging.dacnl39nyabtl.amplifyapp.com/api/price-block/get-price-blocks";
@@ -41,9 +41,7 @@ const getPriceBlocks = async (url: string) => {
 
 export function Dashboard() {
   const [priceBlocks, setPriceBlocks] = useState<PriceBlock[]>([]);
-
   const [currentEnv, setCurrentEnv] = useState(0);
-
   const [currentPriceBlockIndex, setCurrentPriceBlockIndex] = useState(0);
 
   const gridSize = usePriceBlockStore((state) => state.gridSize);
@@ -60,6 +58,21 @@ export function Dashboard() {
         usePriceBlockStore.getState().setLoading(false);
       });
   }, []); */
+
+  const example = {
+    textCustom1: "testo 1",
+    textCustom2: "testo 2",
+    textCustom10: "testo 3"
+  };
+
+  const customFields = Object.entries(example)
+    .filter(([key]) => key.startsWith("textCustom"))
+    .map(([key, value]) => {
+      const customFieldKey = `customfield_${key.replace("textCustom", "")}`;
+      return { id: customFieldKey, value };
+    });
+
+  console.log({ customFields });
 
   return (
     <div className="grid h-screen w-full pl-[56px]">
@@ -230,9 +243,7 @@ export function Dashboard() {
                     discount="30%"
                     discountedValue="44,90"
                     fontsUrl={priceBlocks[currentPriceBlockIndex].jsonConf.settings.fontsUrl}
-                    textCustom1="textCustom1"
-                    textCustom2="textCustom2"
-                    textCustom3="textCustom3"
+                    textCustom={customFields}
                   />
                 )
               )}
