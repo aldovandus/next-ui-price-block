@@ -36,13 +36,6 @@ const lookupContent: Partial<LookupElement> = {
   [PriceBlockElementKey.DISCOUNTED]: DiscountedPreview,
   [PriceBlockElementKey.BADGE]: BadgePreview,
   [PriceBlockElementKey.UNIT_TYPE]: UnitTypePreview
-  /*  ["customfield_1"]: CustomFieldPreview,
-  ["customfield_2"]: CustomFieldPreview,
-  ["customfield_3"]: CustomFieldPreview,
-  ["customfield_10"]: CustomFieldPreview,
-  ["customfield_9"]: CustomFieldPreview,
-  ["customfield_6"]: CustomFieldPreview,
-  ["customfield_5"]: CustomFieldPreview */
 };
 
 for (let i = 0; i < customFieldIndex; i++) {
@@ -86,16 +79,6 @@ const Item = (props: ItemProps) => {
 };
 
 const Elements = ({ elementKey, elements, settings }: { elementKey: string; elements: IPriceBlockElements; settings: IPriceBlockSettings }) => {
-  /*   const style = useMemo(() => {
-    return {
-      height: NUM_ROWS * GRID_SIZE,
-      width: NUM_COLUMNS * GRID_SIZE
-    };
-  }, []); */
-
-  /* return <div>{Object.keys(elements).map((item) => item.split("customfield_"))}</div>;
-
-  return <div>{JSON.stringify(Object.keys(elements))}</div>; */
   return (
     <div className="h-full w-full  ">
       {Object.keys(elements).map((elementKeyIndex) => {
