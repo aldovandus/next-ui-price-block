@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PriceBlockElementKey } from "@/components/types";
+import { PriceBlockElementKey } from "../components/types";
 import { create } from "zustand";
 
 interface PriceBlockStoreState {
