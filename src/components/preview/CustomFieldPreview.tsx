@@ -24,10 +24,10 @@ const CustomFieldPreview = ({
     return { ...boxStyle, ...fontStyle };
   }, [boxStyle, fontStyle]);
 
-  if (!currentCustomField) return null;
+  if (!currentCustomField?.value || currentCustomField.value.length === 0) return null;
   return (
     <div className={classNames("flex h-full w-full flex-col justify-center")} style={getStyle}>
-      <div dangerouslySetInnerHTML={{ __html: currentCustomField?.value }} />
+      <div dangerouslySetInnerHTML={{ __html: currentCustomField.value }} />
     </div>
   );
 };
