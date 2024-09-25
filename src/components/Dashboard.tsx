@@ -74,39 +74,6 @@ export function Dashboard() {
             <form className="grid w-full items-start gap-6">
               <fieldset className="grid gap-6 rounded-lg border p-4">
                 <legend className="-ml-1 px-1 text-sm font-medium">Settings</legend>
-                <div className="grid gap-3">
-                  <Label htmlFor="model">Current PriceBlock</Label>
-                  <Select
-                    disabled={isLoading}
-                    onValueChange={(e) => {
-                      console.error({ e });
-                      setCurrentPriceBlockIndex(parseInt(e));
-                    }}
-                  >
-                    <SelectTrigger id="model" className="items-start [&_[data-description]]:hidden">
-                      <SelectValue placeholder="Select a Price Block" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {priceBlocks.map((priceBlock, index) => (
-                        <SelectItem value={index.toString()}>
-                          <div className="flex items-start gap-3 text-muted-foreground">
-                            <div className="grid gap-0.5">
-                              {/* <p>
-                                Neural <span className="font-medium text-foreground">Genesis</span>
-                              </p> */}
-                              <p>
-                                <span className="font-medium text-foreground">{priceBlock.name}</span>
-                              </p>
-                              <p className="text-xs" data-description>
-                                {priceBlock._id}.
-                              </p>
-                            </div>
-                          </div>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
 
                 <div className="grid gap-3">
                   <Label htmlFor="model">Choose Env</Label>
@@ -132,6 +99,39 @@ export function Dashboard() {
                               </p>
                               <p className="text-xs" data-description>
                                 {enviroment.env}.
+                              </p>
+                            </div>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="model">Current PriceBlock</Label>
+                  <Select
+                    disabled={isLoading || priceBlocks.length === 0}
+                    onValueChange={(e) => {
+                      console.error({ e });
+                      setCurrentPriceBlockIndex(parseInt(e));
+                    }}
+                  >
+                    <SelectTrigger id="model" className="items-start [&_[data-description]]:hidden">
+                      <SelectValue placeholder="Select a Price Block" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {priceBlocks.map((priceBlock, index) => (
+                        <SelectItem value={index.toString()}>
+                          <div className="flex items-start gap-3 text-muted-foreground">
+                            <div className="grid gap-0.5">
+                              {/* <p>
+                                Neural <span className="font-medium text-foreground">Genesis</span>
+                              </p> */}
+                              <p>
+                                <span className="font-medium text-foreground">{priceBlock.name}</span>
+                              </p>
+                              <p className="text-xs" data-description>
+                                {priceBlock._id}.
                               </p>
                             </div>
                           </div>
