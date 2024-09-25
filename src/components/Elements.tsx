@@ -17,6 +17,7 @@ import CustomFieldPreview from "./preview/CustomFieldPreview";
 import BadgePreview from "./preview/BadgePreview";
 import { usePriceBlockStore } from "../zustand/price-block-store";
 import UnitTypePreview from "./preview/UnitTypePreview";
+import StaticCustomFieldPreview from "./preview/StaticCustomFieldPreview";
 //import DraggableItem from '../DraggableItem';
 //import { PriceBlockElementKey } from '../types';
 //import { GRID_SIZE, NUM_COLUMNS, NUM_COLUMNS_BADGE, NUM_ROWS } from '../PriceBlockGrid';
@@ -40,6 +41,9 @@ const lookupContent: Partial<LookupElement> = {
 
 for (let i = 0; i < customFieldIndex; i++) {
   lookupContent[`customfield_${i}` as DynamicPriceBlockElementKey] = CustomFieldPreview;
+}
+for (let i = 0; i < customFieldIndex; i++) {
+  lookupContent[`static_customfield_${i}` as DynamicPriceBlockElementKey] = StaticCustomFieldPreview;
 }
 
 // Props for the Item component

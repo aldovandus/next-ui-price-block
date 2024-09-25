@@ -125,6 +125,12 @@ interface IUnitTypeProperties {
   box?: IPriceBlockBox;
 }
 
+interface IStaticCustomFieldProperties {
+  exampleContent: string;
+  font: IPriceBlockFont;
+  box?: IPriceBlockBox;
+}
+
 interface ICustomFieldProperties {
   font: IPriceBlockFont;
   box?: IPriceBlockBox;
@@ -187,6 +193,7 @@ export type {
   IUnitTypeProperties,
   ICustomFieldProperties,
   PriceBLockForSave,
-  DynamicPriceBlockElementKey
+  DynamicPriceBlockElementKey,
+  IStaticCustomFieldProperties
 };
 export { PriceFormatType, PriceBlockElementKey, FontStyle, AlignText };
