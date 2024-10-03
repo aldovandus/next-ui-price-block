@@ -52,14 +52,13 @@ interface ItemProps {
   item?: IPriceBlockElement<any>;
   settings: IPriceBlockSettings;
   properties?: PriceBlockGenericProperties;
+  numRows: number;
+  gridSize: number;
   elementKey: string;
 }
 
 const Item = (props: ItemProps) => {
-  const gridSize = usePriceBlockStore((state) => state.gridSize);
-  //const numCols = usePriceBlockStore((state) => state.numCols);
-  const numRows = usePriceBlockStore((state) => state.numRows);
-  const { item } = props;
+  const { item, gridSize, numRows } = props;
   const currentStyle = useMemo(() => {
     if (!item) return {};
     const { position } = item;
@@ -82,7 +81,19 @@ const Item = (props: ItemProps) => {
   );
 };
 
-const Elements = ({ elementKey, elements, settings }: { elementKey: string; elements: IPriceBlockElements; settings: IPriceBlockSettings }) => {
+const Elements = ({
+  elementKey,
+  elements,
+  settings,
+  numRows,
+  gridSize
+}: {
+  elementKey: string;
+  elements: IPriceBlockElements;
+  settings: IPriceBlockSettings;
+  numRows: number;
+  gridSize: number;
+}) => {
   return (
     <div className="h-full w-full  ">
       {Object.keys(elements).map((elementKeyIndex) => {
@@ -93,6 +104,8 @@ const Elements = ({ elementKey, elements, settings }: { elementKey: string; elem
             elementKey={elementKey}
             properties={element?.properties}
             item={element}
+            numRows={numRows}
+            gridSize={gridSize}
             settings={settings}
             key={`${elementKey}_${elementKeyIndex}`}
             id={elementKeyIndex as PriceBlockElementKey}

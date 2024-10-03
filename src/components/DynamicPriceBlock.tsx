@@ -6,7 +6,7 @@ import { usePriceBlockStore } from "../zustand/price-block-store";
 interface Props {
   elementKey: string;
   priceBlockJson: PriceBLockForSave;
-  gridSize?: number;
+  gridSize: number;
   numRows?: number;
   numCols?: number;
   fullPriceValue?: string;
@@ -50,9 +50,6 @@ const DynamicPriceBlock = ({
     if (numCols) usePriceBlockStore.setState({ numCols });
     usePriceBlockStore.setState({ discount, fullPriceValue, discountedValue, textCustom1, textCustom2, textCustom3 }); */
     usePriceBlockStore.getState().initPriceBlockReader(elementKey, {
-      gridSize,
-      numRows,
-      numCols,
       fontsUrl,
       discount,
       fullPriceValue,
@@ -60,7 +57,7 @@ const DynamicPriceBlock = ({
       unitType,
       textCustom
     });
-  }, [discount, discountedValue, elementKey, fontsUrl, fullPriceValue, gridSize, numCols, numRows, textCustom, unitType]);
+  }, [discount, discountedValue, elementKey, fontsUrl, fullPriceValue, textCustom, unitType]);
 
   if (!priceBlockJson) return null;
   return (
@@ -72,7 +69,13 @@ const DynamicPriceBlock = ({
         width: numCols * gridSizeValue
       }}
     >
-      <Elements elementKey={elementKey} elements={priceBlockJson.priceBlockElements} settings={priceBlockJson.settings} />
+      <Elements
+        gridSize={gridSize}
+        numRows={numRows}
+        elementKey={elementKey}
+        elements={priceBlockJson.priceBlockElements}
+        settings={priceBlockJson.settings}
+      />
     </div>
   );
 };
