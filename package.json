@@ -1,7 +1,7 @@
 {
   "name": "next-ui-price-block",
   "private": false,
-  "version": "1.2.4",
+  "version": "1.2.5",
   "type": "module",
   "main": "index.ts",
   "module": "index.ts",
