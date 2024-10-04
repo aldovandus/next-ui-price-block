@@ -44,9 +44,10 @@ export function Dashboard() {
   const [currentEnv, setCurrentEnv] = useState(0);
   const [currentPriceBlockIndex, setCurrentPriceBlockIndex] = useState(0);
 
-  const gridSize = usePriceBlockStore((state) => state.gridSize);
-  const numRows = usePriceBlockStore((state) => state.numRows);
-  const numCols = usePriceBlockStore((state) => state.numCols);
+  //const gridSize = usePriceBlockStore((state) => state.gridSize);
+  //const numRows = usePriceBlockStore((state) => state.numRows);
+  //const numCols = usePriceBlockStore((state) => state.numCols);
+  const [gridSize, setGridSize] = useState(11);
   const isLoading = usePriceBlockStore((state) => state.isLoading);
 
   const example = {
@@ -144,7 +145,8 @@ export function Dashboard() {
                   <Label htmlFor="temperature">Grid</Label>
                   <Input
                     onChange={(e) => {
-                      usePriceBlockStore.getState().setGridSize(parseInt(e.target.value));
+                      //usePriceBlockStore.getState().setGridSize(parseInt(e.target.value));
+                      setGridSize(parseInt(e.target.value));
                     }}
                     id="temperature"
                     defaultValue={18}
@@ -157,7 +159,7 @@ export function Dashboard() {
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="grid gap-3">
+                  {/*   <div className="grid gap-3">
                     <Label htmlFor="top-p">Num Cols</Label>
                     <Input
                       value={numCols}
@@ -170,8 +172,8 @@ export function Dashboard() {
                       placeholder="0.7"
                       disabled={isLoading}
                     />
-                  </div>
-                  <div className="grid gap-3">
+                  </div> */}
+                  {/* <div className="grid gap-3">
                     <Label htmlFor="top-k">Num Rows</Label>
                     <Input
                       value={numRows}
@@ -184,7 +186,7 @@ export function Dashboard() {
                       placeholder="0.0"
                       disabled={isLoading}
                     />
-                  </div>
+                  </div> */}
 
                   <div>
                     <Button
@@ -226,7 +228,9 @@ export function Dashboard() {
                     elementKey="test_price_block"
                     key={currentPriceBlockIndex}
                     priceBlockJson={priceBlocks[currentPriceBlockIndex].jsonConf}
-                    gridSize={10}
+                    gridSize={gridSize}
+                    numCols={priceBlocks[currentPriceBlockIndex].numCols}
+                    numRows={priceBlocks[currentPriceBlockIndex].numRows}
                     fullPriceValue="100.40"
                     discount="30%"
                     discountedValue="44,90"
