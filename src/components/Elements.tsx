@@ -95,7 +95,7 @@ const Elements = ({
   gridSize: number;
 }) => {
   return (
-    <div className="h-full w-full  ">
+    <div className="h-full w-full">
       {Object.keys(elements).map((elementKeyIndex) => {
         const element = elements[elementKeyIndex as PriceBlockElementKey];
 

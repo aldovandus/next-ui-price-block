@@ -7,8 +7,8 @@ interface Props {
   elementKey: string;
   priceBlockJson: PriceBLockForSave;
   gridSize: number;
-  numRows?: number;
-  numCols?: number;
+  numRows: number;
+  numCols: number;
   fullPriceValue?: string;
   discountedValue?: string;
   discount?: string;
@@ -21,8 +21,8 @@ const DynamicPriceBlock = ({
   elementKey,
   priceBlockJson,
   gridSize,
-  numRows = 8,
-  numCols = 8,
+  numRows,
+  numCols,
   discount,
   fontsUrl,
   fullPriceValue,
@@ -30,8 +30,6 @@ const DynamicPriceBlock = ({
   unitType,
   textCustom
 }: Props) => {
-  const gridSizeValue = usePriceBlockStore((state) => state.gridSize);
-
   const background = priceBlockJson?.settings?.background;
 
   const getBackground = useMemo(() => {
@@ -65,8 +63,8 @@ const DynamicPriceBlock = ({
       className="relative"
       style={{
         background: getBackground,
-        height: numRows * gridSizeValue,
-        width: numCols * gridSizeValue
+        height: numRows * gridSize,
+        width: numCols * gridSize
       }}
     >
       <Elements
