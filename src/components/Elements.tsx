@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 //import usePriceBlockStore from '@/zustand/price-block/priceBlock';
-import { CSSProperties, FC, useMemo } from "react";
+import { CSSProperties, FC, useMemo } from 'react';
 import {
   DynamicPriceBlockElementKey,
   IGenericPreviewProps,
@@ -8,16 +8,15 @@ import {
   IPriceBlockElements,
   IPriceBlockSettings,
   PriceBlockElementKey,
-  PriceBlockGenericProperties
-} from "./types";
-import FullPricePreview from "./preview/FullPricePreview";
-import DiscountedPreview from "./preview/DiscountedPreview";
-import DiscountPreview from "./preview/DiscountPreview";
-import CustomFieldPreview from "./preview/CustomFieldPreview";
-import BadgePreview from "./preview/BadgePreview";
-import { usePriceBlockStore } from "../zustand/price-block-store";
-import UnitTypePreview from "./preview/UnitTypePreview";
-import StaticCustomFieldPreview from "./preview/StaticCustomFieldPreview";
+  PriceBlockGenericProperties,
+} from './types';
+import FullPricePreview from './preview/FullPricePreview';
+import DiscountedPreview from './preview/DiscountedPreview';
+import DiscountPreview from './preview/DiscountPreview';
+import CustomFieldPreview from './preview/CustomFieldPreview';
+import BadgePreview from './preview/BadgePreview';
+import UnitTypePreview from './preview/UnitTypePreview';
+import StaticCustomFieldPreview from './preview/StaticCustomFieldPreview';
 //import DraggableItem from '../DraggableItem';
 //import { PriceBlockElementKey } from '../types';
 //import { GRID_SIZE, NUM_COLUMNS, NUM_COLUMNS_BADGE, NUM_ROWS } from '../PriceBlockGrid';
@@ -36,7 +35,7 @@ const lookupContent: Partial<LookupElement> = {
   [PriceBlockElementKey.DISCOUNT]: DiscountPreview,
   [PriceBlockElementKey.DISCOUNTED]: DiscountedPreview,
   [PriceBlockElementKey.BADGE]: BadgePreview,
-  [PriceBlockElementKey.UNIT_TYPE]: UnitTypePreview
+  [PriceBlockElementKey.UNIT_TYPE]: UnitTypePreview,
 };
 
 for (let i = 0; i < customFieldIndex; i++) {
@@ -63,12 +62,12 @@ const Item = (props: ItemProps) => {
     if (!item) return {};
     const { position } = item;
     return {
-      position: "absolute",
+      position: 'absolute',
       bottom: (numRows - position.rowEnd) * gridSize,
       left: position.colStart * gridSize,
       width: (position.colEnd - position.colStart) * gridSize,
       height: (position.rowEnd - position.rowStart) * gridSize,
-      zIndex: item.layer
+      zIndex: item.layer,
     };
   }, [gridSize, item, numRows]);
 
@@ -86,7 +85,7 @@ const Elements = ({
   elements,
   settings,
   numRows,
-  gridSize
+  gridSize,
 }: {
   elementKey: string;
   elements: IPriceBlockElements;
