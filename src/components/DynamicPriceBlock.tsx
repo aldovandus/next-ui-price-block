@@ -53,9 +53,10 @@ const DynamicPriceBlock = ({
       fullPriceValue,
       discountedValue,
       unitType,
-      textCustom
+      textCustom,
+      gridSize
     });
-  }, [discount, discountedValue, elementKey, fontsUrl, fullPriceValue, textCustom, unitType]);
+  }, [discount, discountedValue, elementKey, fontsUrl, fullPriceValue, gridSize, textCustom, unitType]);
 
   if (!priceBlockJson) return null;
   return (
