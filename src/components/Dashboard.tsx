@@ -1,29 +1,28 @@
-import "../index.css";
-import { Badge } from "@/components/ui/badge";
+import '../index.css';
+import { Badge } from '@/components/ui/badge';
 //import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import DynamicPriceBlock from "./DynamicPriceBlock";
-import { PriceBlock } from "@/types/price-block";
-import { useState } from "react";
-import { usePriceBlockStore } from "../zustand/price-block-store";
-import { Skeleton } from "./ui/skeleton";
-import { Button } from "./ui/button";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import DynamicPriceBlock from './DynamicPriceBlock';
+import { PriceBlock } from '@/types/price-block';
+import { useState } from 'react';
+import { Skeleton } from './ui/skeleton';
+import { Button } from './ui/button';
 
 const enviroments = [
   {
     id: 1,
-    country: "Italy",
-    env: "staging",
-    url: "https://staging.dacnl39nyabtl.amplifyapp.com"
+    country: 'Italy',
+    env: 'staging',
+    url: 'https://staging.dacnl39nyabtl.amplifyapp.com',
   },
   {
     id: 2,
-    country: "Italy",
-    env: "prod",
-    url: "https://environments-it.dacnl39nyabtl.amplifyapp.com"
-  }
+    country: 'Italy',
+    env: 'prod',
+    url: 'https://environments-it.dacnl39nyabtl.amplifyapp.com',
+  },
 ];
 
 //const url = "https://staging.dacnl39nyabtl.amplifyapp.com/api/price-block/get-price-blocks";
@@ -40,26 +39,23 @@ const getPriceBlocks = async (url: string) => {
 };
 
 export function Dashboard() {
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [priceBlocks, setPriceBlocks] = useState<PriceBlock[]>([]);
   const [currentEnv, setCurrentEnv] = useState(0);
   const [currentPriceBlockIndex, setCurrentPriceBlockIndex] = useState(0);
 
-  //const gridSize = usePriceBlockStore((state) => state.gridSize);
-  //const numRows = usePriceBlockStore((state) => state.numRows);
-  //const numCols = usePriceBlockStore((state) => state.numCols);
   const [gridSize, setGridSize] = useState(11);
-  const isLoading = usePriceBlockStore((state) => state.isLoading);
 
   const example = {
-    textCustom1: "testo 1",
-    textCustom2: "testo 2",
-    textCustom10: "testo 3"
+    textCustom1: 'testo 1',
+    textCustom2: 'testo 2',
+    textCustom10: 'testo 3',
   };
 
   const customFields = Object.entries(example)
-    .filter(([key]) => key.startsWith("textCustom"))
+    .filter(([key]) => key.startsWith('textCustom'))
     .map(([key, value]) => {
-      const customFieldKey = `customfield_${key.replace("textCustom", "")}`;
+      const customFieldKey = `customfield_${key.replace('textCustom', '')}`;
       return { id: customFieldKey, value };
     });
 
@@ -108,6 +104,24 @@ export function Dashboard() {
                     </SelectContent>
                   </Select>
                 </div>
+                <div>
+                  <Button
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      setLoading(true);
+                      const res = await getPriceBlocks(enviroments[currentEnv]?.url);
+
+                      setPriceBlocks(res);
+                      console.log(res);
+
+                      setLoading(false);
+                    }}
+                    type="submit"
+                    className=""
+                  >
+                    load env
+                  </Button>
+                </div>
                 <div className="grid gap-3">
                   <Label htmlFor="model">Current PriceBlock</Label>
                   <Select
@@ -145,7 +159,6 @@ export function Dashboard() {
                   <Label htmlFor="temperature">Grid</Label>
                   <Input
                     onChange={(e) => {
-                      //usePriceBlockStore.getState().setGridSize(parseInt(e.target.value));
                       setGridSize(parseInt(e.target.value));
                     }}
                     id="temperature"
@@ -158,54 +171,7 @@ export function Dashboard() {
                     disabled={isLoading}
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  {/*   <div className="grid gap-3">
-                    <Label htmlFor="top-p">Num Cols</Label>
-                    <Input
-                      value={numCols}
-                      defaultValue={usePriceBlockStore.getState().numCols}
-                      onChange={(e) => {
-                        usePriceBlockStore.getState().setNumCols(parseInt(e.target.value));
-                      }}
-                      id="top-p"
-                      type="number"
-                      placeholder="0.7"
-                      disabled={isLoading}
-                    />
-                  </div> */}
-                  {/* <div className="grid gap-3">
-                    <Label htmlFor="top-k">Num Rows</Label>
-                    <Input
-                      value={numRows}
-                      defaultValue={numRows}
-                      onChange={(e) => {
-                        usePriceBlockStore.getState().setNumRows(parseInt(e.target.value));
-                      }}
-                      id="top-k"
-                      type="number"
-                      placeholder="0.0"
-                      disabled={isLoading}
-                    />
-                  </div> */}
-
-                  <div>
-                    <Button
-                      onClick={async (e) => {
-                        e.preventDefault();
-                        usePriceBlockStore.getState().setLoading(true);
-                        const res = await getPriceBlocks(enviroments[currentEnv]?.url);
-
-                        setPriceBlocks(res);
-
-                        usePriceBlockStore.getState().setLoading(false);
-                      }}
-                      type="submit"
-                      className=""
-                    >
-                      load env
-                    </Button>
-                  </div>
-                </div>
+                <div className="grid grid-cols-2 gap-4"></div>
               </fieldset>
             </form>
           </div>

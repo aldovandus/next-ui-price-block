@@ -1,4 +1,3 @@
-//import usePriceBlockStore from '@/zustand/price-block/priceBlock';
 import type { CSSProperties } from 'react';
 import { useMemo } from 'react';
 import classNames from 'classnames';
@@ -8,27 +7,16 @@ import useBoxStyle from '../../hooks/useBoxStyle';
 import useFontStyle from '../../hooks/useFontStyle';
 import { usePriceBlockStore } from '../../zustand/price-block-store';
 
-/* const settings = {
-	currency: '¤',
-	separator: {
-		thousand: '',
-		decimal: '',
-	},
-}; */
-
 interface Props {
   elementKey: string;
   settings?: IPriceBlockSettings;
   properties?: IFullPriceProperties;
+  gridSize: number;
 }
 
-const FullPricePreview = ({ elementKey, settings, properties }: Props) => {
-  //const settings = usePriceBlockStore((state) => state.settings);
-  //const priceBlockElements = usePriceBlockStore((state) => state.priceBlockElements);
-  //const element = priceBlockElements[PriceBlockElementKey.FULLPRICE] as IPriceBlockElement<IFullPriceProperties>;
-  //const element = priceBlockElements[0];
-  const boxStyle = useBoxStyle({ box: properties?.box });
-  const fontStyle = useFontStyle({ font: properties?.font });
+const FullPricePreview = ({ elementKey, settings, properties, gridSize }: Props) => {
+  const boxStyle = useBoxStyle({ gridSize, box: properties?.box });
+  const fontStyle = useFontStyle({ gridSize, font: properties?.font });
 
   const fullPriceValue = usePriceBlockStore((state) => state.dataComp[elementKey]?.fullPriceValue);
 
@@ -60,6 +48,8 @@ const FullPricePreview = ({ elementKey, settings, properties }: Props) => {
         fontSize={properties.font.size}
         currency={settings?.currency}
         value={parseFloat(fullPriceValue)}
+        type={properties.format.isEnable ? properties.format.type : undefined}
+        gridSize={gridSize}
       />
     </div>
   );

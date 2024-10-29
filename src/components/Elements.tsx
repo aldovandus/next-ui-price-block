@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-//import usePriceBlockStore from '@/zustand/price-block/priceBlock';
 import { CSSProperties, FC, useMemo } from 'react';
 import {
   DynamicPriceBlockElementKey,
@@ -25,7 +24,6 @@ import StaticCustomFieldPreview from './preview/StaticCustomFieldPreview';
 export const NUM_ROWS = 17;
 export const NUM_COLUMNS = 8; */
 export const NUM_COLUMNS_BADGE = 24;
-export const LIMIT_TOP_ROW_BADGE = -4;
 
 const customFieldIndex = 100;
 

@@ -10,14 +10,15 @@ const DiscountedPreview = ({
   elementKey,
   settings,
   properties,
+  gridSize,
 }: {
   elementKey: string;
   settings: IPriceBlockSettings;
   properties: IDiscountedProperties;
+  gridSize: number;
 }) => {
-  //const element = priceBlockElements[PriceBlockElementKey.DISCOUNTED] as IPriceBlockElement<IDiscountedProperties>;
-  const boxStyle = useBoxStyle({ box: properties.box });
-  const fontStyle = useFontStyle({ font: properties.font });
+  const boxStyle = useBoxStyle({ gridSize, box: properties.box });
+  const fontStyle = useFontStyle({ gridSize, font: properties.font });
   const discountedValue = usePriceBlockStore((state) => state.dataComp[elementKey]?.discountedValue);
 
   const getStyle = useMemo((): CSSProperties => {
@@ -36,6 +37,7 @@ const DiscountedPreview = ({
         currency={settings.currency}
         value={parseFloat(discountedValue)}
         type={properties.format.isEnable ? properties.format.type : undefined}
+        gridSize={gridSize}
       />
     </div>
   );
