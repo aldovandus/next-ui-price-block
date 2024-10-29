@@ -6,10 +6,9 @@ import classNames from 'classnames';
 import { IDiscountedProperties } from '../types';
 import { usePriceBlockStore } from '../../zustand/price-block-store';
 
-const DiscountPreview = ({ elementKey, properties }: { elementKey: string; properties: IDiscountedProperties }) => {
-  //const element = priceBlockElements[PriceBlockElementKey.DISCOUNT] as IPriceBlockElement<IDiscountProperties>;
-  const boxStyle = useBoxStyle({ box: properties.box });
-  const fontStyle = useFontStyle({ font: properties.font });
+const DiscountPreview = ({ elementKey, properties, gridSize }: { elementKey: string; properties: IDiscountedProperties; gridSize: number }) => {
+  const boxStyle = useBoxStyle({ gridSize, box: properties.box });
+  const fontStyle = useFontStyle({ gridSize, font: properties.font });
 
   const discount = usePriceBlockStore((state) => state.dataComp[elementKey]?.discount);
 

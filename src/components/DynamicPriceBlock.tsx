@@ -1,7 +1,7 @@
-import { useEffect, useMemo } from "react";
-import Elements from "./Elements";
-import { PriceBLockForSave } from "./types";
-import { usePriceBlockStore } from "../zustand/price-block-store";
+import { useEffect, useMemo } from 'react';
+import Elements from './Elements';
+import { PriceBLockForSave } from './types';
+import { usePriceBlockStore } from '../zustand/price-block-store';
 
 interface Props {
   elementKey: string;
@@ -28,25 +28,21 @@ const DynamicPriceBlock = ({
   fullPriceValue,
   discountedValue,
   unitType,
-  textCustom
+  textCustom,
 }: Props) => {
   const background = priceBlockJson?.settings?.background;
 
   const getBackground = useMemo(() => {
-    if (background.type == "image") {
+    if (background.type == 'image') {
       return `url(${background.url}) center center / contain no-repeat`;
-    } else if (background.type == "color") {
+    } else if (background.type == 'color') {
       return background.color;
     } else {
-      return "none";
+      return 'none';
     }
   }, [background?.color, background?.type, background?.url]);
 
   useEffect(() => {
-    /*     if (gridSize) usePriceBlockStore.setState({ gridSize });
-    if (numRows) usePriceBlockStore.setState({ numRows });
-    if (numCols) usePriceBlockStore.setState({ numCols });
-    usePriceBlockStore.setState({ discount, fullPriceValue, discountedValue, textCustom1, textCustom2, textCustom3 }); */
     usePriceBlockStore.getState().initPriceBlockReader(elementKey, {
       fontsUrl,
       discount,
@@ -54,7 +50,7 @@ const DynamicPriceBlock = ({
       discountedValue,
       unitType,
       textCustom,
-      gridSize
+      gridSize,
     });
   }, [discount, discountedValue, elementKey, fontsUrl, fullPriceValue, gridSize, textCustom, unitType]);
 
@@ -65,7 +61,7 @@ const DynamicPriceBlock = ({
       style={{
         background: getBackground,
         height: numRows * gridSize,
-        width: numCols * gridSize
+        width: numCols * gridSize,
       }}
     >
       <Elements
